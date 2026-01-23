@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "OutGame\\TransformComponent.h.obj",
+            "outputs": [
+                "C:\\Users\\pg29kiran\\Documents\\GameEngine\\EngineXForStudent\\OutGame\\vc143.pdb",
+                "OutGame\\",
+                "C:\\Users\\pg29kiran\\Documents\\GameEngine\\EngineXForStudent\\OutGame\\TransformComponent.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "Game\\Public\\Components\\TransformComponent.h",
+                    "source-path": "c:\\users\\pg29kiran\\documents\\gameengine\\enginexforstudent\\game\\public\\components\\transformcomponent.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

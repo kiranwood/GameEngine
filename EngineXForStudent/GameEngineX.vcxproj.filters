@@ -41,6 +41,8 @@
     <ClInclude Include="Game\Public\Actors\Ball.h" />
     <ClInclude Include="Game\Public\Component.h" />
     <ClInclude Include="Game\Public\ComponentTypes.h" />
+    <ClInclude Include="Game\Public\Components\RenderComponent.h" />
+    <ClInclude Include="Game\Public\Components\CircleRenderComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\Private\Main.cpp">
@@ -55,8 +57,33 @@
     <ClCompile Include="Game\Private\Actors\Ball.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Private\Componet.cpp">
+    <ClCompile Include="Game\Private\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Public\Components\TransformComponent.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Components\TransformComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Components\RenderComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Components\CircleRenderComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="Build\GameEngineXd.exe" />
+    <None Include="Build\GameEngineXd.pdb" />
+    <None Include="Build\libfreetype-6.dll" />
+    <None Include="Build\SDL2.dll" />
+    <None Include="Build\SDL2-gfx.dll" />
+    <None Include="Build\SDL2-ttf.dll" />
+    <None Include="Build\zlib1.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Build\afternight.ttf" />
   </ItemGroup>
 </Project>

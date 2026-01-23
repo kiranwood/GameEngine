@@ -1,26 +1,15 @@
 #include "Game/Public/Actors/Ball.h"
+#include "Game/Public/Components/TransformComponent.h"
+#include "Game/Public/Components/CircleRenderComponent.h"
 
-Ball::Ball(float BallRadius, exColor BallColor, exVector2 BallCenter)
+Ball::Ball(float BallRadius, exColor BallColor)
 {
 	mRadius = BallRadius;
 	mColor = BallColor;
-	mCenter = BallCenter;
 }
 
-void Ball::Render(exEngineInterface* EngineInterface)
+void Ball::BeginPlay()
 {
-	if (EngineInterface)
-	{
-		EngineInterface->DrawCircle(mCenter, mRadius, mColor, 2);
-	}
-}
-
-void Ball::SetBallPosition(const exVector2& NewPosition)
-{
-	mCenter = NewPosition;
-}
-
-exVector2 Ball::GetBallPosition() const
-{
-	return mCenter;
+	AddComponentOfType<TransformComponent>(exVector2{ 200.0f, 300.0f });
+	AddComponentOfType<CircleRenderComponent>(exColor({ 0, 255, 255, 255 }), 100.0f);
 }

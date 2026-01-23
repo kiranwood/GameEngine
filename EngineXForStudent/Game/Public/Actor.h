@@ -27,10 +27,10 @@ private:
 #pragma region TemplateRegion
 public:
 
-	template<std::derived_from<Component> ComponentType>
-	std::tuple<std::shared_ptr<ComponentType>, bool, String> AddComponentOfType() 
+	template<std::derived_from<Component> ComponentType, typename ...Args>
+	std::tuple<std::shared_ptr<ComponentType>, bool, String> AddComponentOfType(Args... Arguments) 
 	{
-		ComponentType* ComponentPtr = new ComponentType(weak_from_this());
+		ComponentType* ComponentPtr = new ComponentType(weak_from_this(), Arguments...);
 		std::shared_ptr<ComponentType> NewComponent = std::make_shared<ComponentType>(*ComponentPtr);
 		delete ComponentPtr;
 
@@ -43,8 +43,19 @@ public:
 		return { nullptr, false, "Failed to add component" };
 	}
 
+	template<std::derived_from<Component> ComponentType>
+	std::shared_ptr<ComponentType> GetComponentOfType()
+	{
+		for (std::shared_ptr<Component> ComponentIterator : mComponents)
+		{
+			if (std::shared_ptr<ComponentType> FoundComponent = std::dynamic_pointer_cast<ComponentType>(ComponentIterator))
+			{
+				return FoundComponent;
+			}
+		}
 
-
+		return nullptr;
+	}
 
 #pragma endregion
 };

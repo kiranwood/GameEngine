@@ -6,18 +6,14 @@ class Ball : public Actor
 {
 public:
 
-	Ball(float BallRadius, exColor BallColor, exVector2 BallCenter);
+	Ball(float BallRadius, exColor BallColor);
 
-	void Render(exEngineInterface* EngineInterface) override;
 
-	void SetBallPosition(const exVector2& NewPosition);
-	exVector2 GetBallPosition() const;
-
+	virtual void BeginPlay() override;
 
 private:
 
 	float mRadius;
 	exColor mColor;
-	exVector2 mCenter;
 };
 

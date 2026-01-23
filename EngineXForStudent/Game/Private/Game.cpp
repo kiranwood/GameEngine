@@ -60,8 +60,10 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	Color.mColor[2] = 150;
 	Color.mColor[3] = 255;
 
-	mBall = std::make_shared<Ball>(Radius, Color, Center);
+	mBall = std::make_shared<Ball>(Radius, Color);
+	mBall->BeginPlay();
 	mBall->AddComponentOfType<Component>();
+	//mBall->AddComponentOfType<TransformComponent>(Center);
 }
 
 //-----------------------------------------------------------------
@@ -111,8 +113,14 @@ void MyGame::OnEventsConsumed()
 // Like update function. Runs every frame
 void MyGame::Run( float fDeltaT ) // How much time between frames
 {
-	mBall->Render(mEngine);
-	mTextPosition = mBall->GetBallPosition();
+	if (std::shared_ptr<RenderComponent> RenderComp = mBall->GetComponentOfType<RenderComponent>())
+	{
+		RenderComp->Render(mEngine);
+	}
+	if (std::shared_ptr<TransformComponent> BallTransformComp = mBall->GetComponentOfType<TransformComponent>())
+	{
+		mTextPosition = BallTransformComp->GetLocation();
+	}
 
 	if (mUp)
 	{
@@ -122,5 +130,9 @@ void MyGame::Run( float fDeltaT ) // How much time between frames
 	{
 		mTextPosition.y += 20;
 	}
-	mBall->SetBallPosition(mTextPosition);
+
+	if (std::shared_ptr<TransformComponent> BallTransformComp = mBall->GetComponentOfType<TransformComponent>())
+	{
+		BallTransformComp->SetLocation(mTextPosition);
+	}
 }
