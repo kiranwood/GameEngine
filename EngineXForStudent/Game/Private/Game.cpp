@@ -12,6 +12,7 @@
 
 #include "Game/Public/Actors/Ball.h"
 #include "Game/Public/ComponentTypes.h"
+#include "Game/Public/Subsystems/PhysicsSystem.h"
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
 
@@ -117,22 +118,24 @@ void MyGame::Run( float fDeltaT ) // How much time between frames
 	{
 		RenderComp->Render(mEngine);
 	}
-	if (std::shared_ptr<TransformComponent> BallTransformComp = mBall->GetComponentOfType<TransformComponent>())
-	{
-		mTextPosition = BallTransformComp->GetLocation();
-	}
+	mBall->Tick(fDeltaT);
+
+	exVector2 BallVelocity(0.0f, 0.0f);
 
 	if (mUp)
 	{
-		mTextPosition.y -= 20;
+		
+		BallVelocity.y -=2.5f;
 	}
 	if (mDown)
 	{
-		mTextPosition.y += 20;
+		BallVelocity.y = 2.5f;
 	}
 
-	if (std::shared_ptr<TransformComponent> BallTransformComp = mBall->GetComponentOfType<TransformComponent>())
+	if (std::shared_ptr<PhysicsComponent> BallPhysicsComp = mBall->GetComponentOfType<PhysicsComponent>())
 	{
-		BallTransformComp->SetLocation(mTextPosition);
+		BallPhysicsComp->SetVelocity(BallVelocity);
 	}
+
+	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
 }

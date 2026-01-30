@@ -6,6 +6,11 @@ Component::~Component()
 {
 }
 
+std::weak_ptr<Actor> Component::GetOwner() const
+{
+	return mOwner;
+}
+
 Component::Component(std::weak_ptr<Actor> Owner) : mOwner(Owner)
 {
 }

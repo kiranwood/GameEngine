@@ -150,11 +150,13 @@
     <ClInclude Include="Game\Public\Actors\Ball.h" />
     <ClInclude Include="Game\Public\Component.h" />
     <ClInclude Include="Game\Public\Components\CircleRenderComponent.h" />
+    <ClInclude Include="Game\Public\Components\PhysicsComponent.h" />
     <ClInclude Include="Game\Public\Components\RenderComponent.h" />
     <ClInclude Include="Game\Public\ComponentTypes.h" />
     <ClInclude Include="Game\Public\Game.h" />
     <ClInclude Include="Game\Public\GameInterface.h" />
     <ClInclude Include="Game\Public\LifetimeInterface.h" />
+    <ClInclude Include="Game\Public\Subsystems\PhysicsSystem.h" />
     <ClInclude Include="Game\Public\Utils.h" />
   </ItemGroup>
   <ItemGroup>
@@ -166,7 +168,9 @@
     <ClCompile Include="Game\Private\Components\TransformComponent.cpp" />
     <ClCompile Include="Game\Private\Components\RenderComponent.cpp" />
     <ClCompile Include="Game\Private\Components\CircleRenderComponent.cpp" />
+    <ClCompile Include="Game\Private\Components\PhysicsComponent.cpp" />
     <ClCompile Include="Game\Public\Components\TransformComponent.h" />
+    <ClCompile Include="Game\Private\Subsystems\PhysicsSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

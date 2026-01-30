@@ -20,7 +20,10 @@ void Actor::EndPlay()
 
 void Actor::Tick(const float DeltaSeconds)
 {
-	//TODO
+	for (std::shared_ptr<Component> ComponentIt : mComponents)
+	{
+		ComponentIt->Tick(DeltaSeconds);
+	}
 }
 
 void Actor::Render(exEngineInterface* EngineInterface)

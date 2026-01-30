@@ -13,6 +13,8 @@ public:
 	Component() = delete;
 	virtual ~Component();
 
+	std::weak_ptr<Actor> GetOwner() const;
+
 protected:
 
 	Component(std::weak_ptr<Actor> Owner);
