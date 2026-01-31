@@ -11,7 +11,7 @@
 #include "Engine/Public/EngineTypes.h"
 
 class Ball;
-
+class Line;
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
 
@@ -34,7 +34,7 @@ public:
 
 private:
 
-	exEngineInterface*			mEngine; 
+	exEngineInterface*			mEngine;
 
 	int							mFontID;
 
@@ -42,6 +42,7 @@ private:
 	bool						mDown;
 
 	exVector2					mTextPosition;
-	std::shared_ptr<Ball>		mBall;
+	std::shared_ptr<Ball>       mBall;
 
+	std::shared_ptr<Line>       mLine;
 };
