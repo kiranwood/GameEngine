@@ -11,6 +11,7 @@
 #include "Engine/Public/EngineTypes.h"
 
 class Ball;
+class Box;
 
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
@@ -43,5 +44,6 @@ private:
 
 	exVector2					mTextPosition;
 	std::shared_ptr<Ball>		mBall;
+	std::shared_ptr<Box>		mBox;
 
 };

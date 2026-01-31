@@ -11,6 +11,7 @@
 #include "Engine/Public/SDL.h"
 
 #include "Game/Public/Actors/Ball.h"
+#include "Game/Public/Actors/Box.h"
 #include "Game/Public/ComponentTypes.h"
 #include "Game/Public/Subsystems/PhysicsSystem.h"
 //-----------------------------------------------------------------
@@ -65,6 +66,10 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	mBall->BeginPlay();
 	mBall->AddComponentOfType<Component>();
 	//mBall->AddComponentOfType<TransformComponent>(Center);
+
+	mBox = std::make_shared<Box>(200.0f, 500.0f, Color);
+	mBox->BeginPlay();
+	mBox->AddComponentOfType<Component>();
 }
 
 //-----------------------------------------------------------------
@@ -119,6 +124,12 @@ void MyGame::Run( float fDeltaT ) // How much time between frames
 		RenderComp->Render(mEngine);
 	}
 	mBall->Tick(fDeltaT);
+
+	if (std::shared_ptr<RenderComponent> RenderComp = mBox->GetComponentOfType<RenderComponent>())
+	{
+		RenderComp->Render(mEngine);
+	}
+	mBox->Tick(fDeltaT);
 
 	exVector2 BallVelocity(0.0f, 0.0f);
 

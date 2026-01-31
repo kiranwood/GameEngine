@@ -148,7 +148,9 @@
     <ClInclude Include="Engine\Public\EngineTypes.h" />
     <ClInclude Include="Engine\Public\SDL.h" />
     <ClInclude Include="Game\Public\Actors\Ball.h" />
+    <ClInclude Include="Game\Public\Actors\Box.h" />
     <ClInclude Include="Game\Public\Component.h" />
+    <ClInclude Include="Game\Public\Components\BoxRenderComponent.h" />
     <ClInclude Include="Game\Public\Components\CircleRenderComponent.h" />
     <ClInclude Include="Game\Public\Components\PhysicsComponent.h" />
     <ClInclude Include="Game\Public\Components\RenderComponent.h" />
@@ -163,12 +165,14 @@
     <ClCompile Include="Game\Private\Actor.cpp" />
     <ClCompile Include="Game\Private\Actors\Ball.cpp" />
     <ClCompile Include="Game\Private\Component.cpp" />
+    <ClCompile Include="Game\Private\Components\BoxRenderComponent.cpp" />
     <ClCompile Include="Game\Private\Game.cpp" />
     <ClCompile Include="Game\Private\Main.cpp" />
     <ClCompile Include="Game\Private\Components\TransformComponent.cpp" />
     <ClCompile Include="Game\Private\Components\RenderComponent.cpp" />
     <ClCompile Include="Game\Private\Components\CircleRenderComponent.cpp" />
     <ClCompile Include="Game\Private\Components\PhysicsComponent.cpp" />
+    <ClCompile Include="Game\Private\Actors\Box.cpp" />
     <ClCompile Include="Game\Public\Components\TransformComponent.h" />
     <ClCompile Include="Game\Private\Subsystems\PhysicsSystem.cpp" />
   </ItemGroup>

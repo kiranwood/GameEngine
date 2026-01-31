@@ -45,6 +45,8 @@
     <ClInclude Include="Game\Public\Components\CircleRenderComponent.h" />
     <ClInclude Include="Game\Public\Components\PhysicsComponent.h" />
     <ClInclude Include="Game\Public\Subsystems\PhysicsSystem.h" />
+    <ClInclude Include="Game\Public\Actors\Box.h" />
+    <ClInclude Include="Game\Public\Components\BoxRenderComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\Private\Main.cpp">
@@ -78,6 +80,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\Private\Subsystems\PhysicsSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Actors\Box.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Components\BoxRenderComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
