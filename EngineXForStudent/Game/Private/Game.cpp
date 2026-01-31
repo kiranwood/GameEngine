@@ -11,6 +11,7 @@
 #include "Engine/Public/SDL.h"
 
 #include "Game/Public/Actors/Ball.h"
+#include "Game/Public/Actors/Line.h"
 #include "Game/Public/ComponentTypes.h"
 #include "Game/Public/Subsystems/PhysicsSystem.h"
 //-----------------------------------------------------------------
@@ -65,6 +66,14 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	mBall->BeginPlay();
 	mBall->AddComponentOfType<Component>();
 	//mBall->AddComponentOfType<TransformComponent>(Center);
+
+	// Create the Line actor
+	exVector2 lineStart{ 100.0f, 100.0f };
+	exVector2 lineEnd{ 400.0f, 300.0f };
+	exColor lineColor{ 255, 0, 0, 255 };
+
+	mLine = std::make_shared<Line>(lineStart, lineEnd, lineColor);
+	mLine->BeginPlay();
 }
 
 //-----------------------------------------------------------------
@@ -135,6 +144,12 @@ void MyGame::Run( float fDeltaT ) // How much time between frames
 	if (std::shared_ptr<PhysicsComponent> BallPhysicsComp = mBall->GetComponentOfType<PhysicsComponent>())
 	{
 		BallPhysicsComp->SetVelocity(BallVelocity);
+	}
+
+	// Render the Line
+	if (std::shared_ptr<RenderComponent> LineRenderComp = mLine->GetComponentOfType<RenderComponent>())
+	{
+		LineRenderComp->Render(mEngine);
 	}
 
 	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
