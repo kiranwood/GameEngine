@@ -19,7 +19,7 @@ public:
 
 #pragma region Collision
 
-	virtual bool isCollisionDetected(std::weak_ptr<PhysicsComponent>& otherComponent);
+	virtual bool IsCollisionDetected(std::weak_ptr<PhysicsComponent>& otherComponent);
 	virtual void CollisionResolution();
 
 	void ListenForCollision(CollisionEventSignature& delegateToAdd);

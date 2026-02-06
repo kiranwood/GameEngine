@@ -48,7 +48,7 @@ void PhysicsEngine::PhysicsUpdate(const float DeltaTime)
 				if (!secondPhysicsComponentIt->expired())
 				{
 					std::shared_ptr<PhysicsComponent> secondPhysicsComponentToCheck = secondPhysicsComponentIt->lock();
-					if (firstPhysicsComponentToCheck->isCollisionDetected(*secondPhysicsComponentIt))
+					if (firstPhysicsComponentToCheck->IsCollisionDetected(*secondPhysicsComponentIt))
 					{
 						// TODO: Write function to get hit
 						firstPhysicsComponentToCheck->BroadcastCollisionEvent(secondPhysicsComponentToCheck->GetOwner(), { 0.0f, 0.0f }); // 0 is placeholder!!
@@ -56,6 +56,8 @@ void PhysicsEngine::PhysicsUpdate(const float DeltaTime)
 						
 						firstPhysicsComponentToCheck->CollisionResolution();
 						secondPhysicsComponentToCheck->CollisionResolution();
+
+						secondPhysicsComponentToCheck->DoPhysics();
 					}
 				}
 			}

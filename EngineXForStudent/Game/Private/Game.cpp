@@ -14,6 +14,7 @@
 #include "Game/Public/Actors/Box.h"
 #include "Game/Public/ComponentTypes.h"
 #include "Game/Public/Subsystems/PhysicsSystem.h"
+#include "Game/Public/Subsystems/RenderSystem.h"
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
 
@@ -51,25 +52,34 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	mTextPosition.x = 50.0f;
 	mTextPosition.y = 50.0f;
 
-	float Radius = 50.0f;
-	exVector2 Center;
-	Center.x = 300;
-	Center.y = 400;
+	float Radius = 25.0f;
 
-	exColor Color;
-	Color.mColor[0] = 255;
-	Color.mColor[1] = 50;
-	Color.mColor[2] = 150;
-	Color.mColor[3] = 255;
+	exColor Color1;
+	Color1.mColor[0] = 255;
+	Color1.mColor[1] = 50;
+	Color1.mColor[2] = 150;
+	Color1.mColor[3] = 255;
 
-	mBall = std::make_shared<Ball>(Radius, Color);
-	mBall->BeginPlay();
-	mBall->AddComponentOfType<Component>();
+	exColor Color2;
+	Color2.mColor[0] = 255;
+	Color2.mColor[1] = 150;
+	Color2.mColor[2] = 50;
+	Color2.mColor[3] = 255;
+
+	mBall_First = Actor::SpawnActorOfType<Ball>(exVector2(200.0f, 300.0f), Radius, Color1);
+
+	mBall_Second = Actor::SpawnActorOfType<Ball>(exVector2(200.0f, 100.0f), Radius, Color2);
+
+	if (std::shared_ptr<PhysicsComponent> BallPhysicsComp = mBall_Second->GetComponentOfType<PhysicsComponent>())
+	{
+		BallPhysicsComp->SetVelocity(exVector2(0.0f, 0.5f));
+	}
+
 	//mBall->AddComponentOfType<TransformComponent>(Center);
 
-	mBox = std::make_shared<Box>(200.0f, 500.0f, Color);
+	/*mBox = std::make_shared<Box>(200.0f, 500.0f, Color1);
 	mBox->BeginPlay();
-	mBox->AddComponentOfType<Component>();
+	mBox->AddComponentOfType<Component>();*/
 }
 
 //-----------------------------------------------------------------
@@ -119,17 +129,16 @@ void MyGame::OnEventsConsumed()
 // Like update function. Runs every frame
 void MyGame::Run( float fDeltaT ) // How much time between frames
 {
-	if (std::shared_ptr<RenderComponent> RenderComp = mBall->GetComponentOfType<RenderComponent>())
-	{
-		RenderComp->Render(mEngine);
-	}
-	mBall->Tick(fDeltaT);
+	mBall_First->Tick(fDeltaT);
 
-	if (std::shared_ptr<RenderComponent> RenderComp = mBox->GetComponentOfType<RenderComponent>())
+
+	mBall_Second->Tick(fDeltaT);
+
+	/*if (std::shared_ptr<RenderComponent> RenderComp = mBox->GetComponentOfType<RenderComponent>())
 	{
 		RenderComp->Render(mEngine);
 	}
-	mBox->Tick(fDeltaT);
+	mBox->Tick(fDeltaT);*/
 
 	exVector2 BallVelocity(0.0f, 0.0f);
 
@@ -143,10 +152,12 @@ void MyGame::Run( float fDeltaT ) // How much time between frames
 		BallVelocity.y = 2.5f;
 	}
 
-	if (std::shared_ptr<PhysicsComponent> BallPhysicsComp = mBall->GetComponentOfType<PhysicsComponent>())
+	if (std::shared_ptr<PhysicsComponent> BallPhysicsComp = mBall_First->GetComponentOfType<PhysicsComponent>())
 	{
 		BallPhysicsComp->SetVelocity(BallVelocity);
 	}
 
 	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
+
+	RENDER_ENGINE.RenderUpdate(mEngine);
 }

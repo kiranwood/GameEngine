@@ -27,6 +27,15 @@ private:
 #pragma region TemplateRegion
 public:
 
+	template<std::derived_from<Actor> ActorType, typename ...Args>
+	static std::shared_ptr<ActorType> SpawnActorOfType(exVector2 SpawnLocation, Args... Arguments)
+	{
+		std::shared_ptr<ActorType> SpawnedActor = std::make_shared<ActorType>(Arguments...);
+		SpawnedActor->BeginPlay();
+		SpawnedActor->AddComponentOfType<TransformComponent>(SpawnLocation);
+		return SpawnedActor;
+	}
+
 	template<std::derived_from<Component> ComponentType, typename ...Args>
 	std::tuple<std::shared_ptr<ComponentType>, bool, String> AddComponentOfType(Args... Arguments) 
 	{

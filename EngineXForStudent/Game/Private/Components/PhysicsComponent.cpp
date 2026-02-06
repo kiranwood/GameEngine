@@ -39,7 +39,7 @@ void PhysicsComponent::DoPhysics()
     }
 }
 
-bool PhysicsComponent::isCollisionDetected(std::weak_ptr<PhysicsComponent>& otherComponent)
+bool PhysicsComponent::IsCollisionDetected(std::weak_ptr<PhysicsComponent>& otherComponent)
 {
     return false;
 }

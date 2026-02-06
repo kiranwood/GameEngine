@@ -43,7 +43,8 @@ private:
 	bool						mDown;
 
 	exVector2					mTextPosition;
-	std::shared_ptr<Ball>		mBall;
+	std::shared_ptr<Ball>		mBall_First;
+	std::shared_ptr<Ball>		mBall_Second;
 	std::shared_ptr<Box>		mBox;
 
 };

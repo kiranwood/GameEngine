@@ -151,6 +151,7 @@
     <ClInclude Include="Game\Public\Actors\Box.h" />
     <ClInclude Include="Game\Public\Component.h" />
     <ClInclude Include="Game\Public\Components\BoxRenderComponent.h" />
+    <ClInclude Include="Game\Public\Components\CircleColliderComponent.h" />
     <ClInclude Include="Game\Public\Components\CircleRenderComponent.h" />
     <ClInclude Include="Game\Public\Components\PhysicsComponent.h" />
     <ClInclude Include="Game\Public\Components\RenderComponent.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="Game\Public\GameInterface.h" />
     <ClInclude Include="Game\Public\LifetimeInterface.h" />
     <ClInclude Include="Game\Public\Subsystems\PhysicsSystem.h" />
+    <ClInclude Include="Game\Public\Subsystems\RenderSystem.h" />
     <ClInclude Include="Game\Public\Utils.h" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +175,8 @@
     <ClCompile Include="Game\Private\Components\CircleRenderComponent.cpp" />
     <ClCompile Include="Game\Private\Components\PhysicsComponent.cpp" />
     <ClCompile Include="Game\Private\Actors\Box.cpp" />
+    <ClCompile Include="Game\Private\Components\CircleColliderComponent.cpp" />
+    <ClCompile Include="Game\Private\Subsystems\RenderSystem.cpp" />
     <ClCompile Include="Game\Public\Components\TransformComponent.h" />
     <ClCompile Include="Game\Private\Subsystems\PhysicsSystem.cpp" />
   </ItemGroup>
