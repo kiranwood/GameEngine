@@ -15,6 +15,7 @@
 #include "Game/Public/ComponentTypes.h"
 #include "Game/Public/Subsystems/PhysicsSystem.h"
 #include "Game/Public/Subsystems/RenderSystem.h"
+#include "Game/Public/Actors/Text.h"
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
 
@@ -80,6 +81,12 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	/*mBox = std::make_shared<Box>(200.0f, 500.0f, Color1);
 	mBox->BeginPlay();
 	mBox->AddComponentOfType<Component>();*/
+
+	
+	exVector2 textPos{ 50.0f, 20.0f };
+	exColor textColor{ 255, 255, 255, 255 };
+	mText = std::make_shared<Text>(std::string("Score: "), textColor, mFontID, textPos);
+	mText->BeginPlay();
 }
 
 //-----------------------------------------------------------------

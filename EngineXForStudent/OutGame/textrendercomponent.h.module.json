@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "OutGame\\TextRenderComponent.h.obj",
+            "outputs": [
+                "C:\\Users\\Public\\Repos\\GameEngine\\EngineXForStudent\\OutGame\\vc143.pdb",
+                "OutGame\\",
+                "C:\\Users\\Public\\Repos\\GameEngine\\EngineXForStudent\\OutGame\\TextRenderComponent.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "Game\\Public\\Components\\TextRenderComponent.h",
+                    "source-path": "c:\\users\\public\\repos\\gameengine\\enginexforstudent\\game\\public\\components\\textrendercomponent.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

@@ -12,6 +12,7 @@
 
 class Ball;
 class Box;
+class Text;
 
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
@@ -46,5 +47,6 @@ private:
 	std::shared_ptr<Ball>		mBall_First;
 	std::shared_ptr<Ball>		mBall_Second;
 	std::shared_ptr<Box>		mBox;
+	std::shared_ptr<Text>		mText;
 
 };

@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "OutGame\\TextComponent.obj",
+            "outputs": [
+                "OutGame\\TextComponent.h_4629822C6052C161.ifc.dt.module.json",
+                "OutGame\\TextComponent.h_4629822C6052C161.ifc.dt.d.json",
+                "OutGame\\TextComponent.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Users\\Public\\Repos\\GameEngine\\EngineXForStudent\\Game\\Public\\Components\\TextComponent.h",
+                    "source-path": "c:\\users\\public\\repos\\gameengine\\enginexforstudent\\game\\public\\components\\textcomponent.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}
