@@ -49,4 +49,5 @@ private:
 	std::shared_ptr<Box>		mBox;
 	std::shared_ptr<Text>		mText;
 
+	int							mScore;
 };

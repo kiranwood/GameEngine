@@ -12,10 +12,13 @@
 
 #include "Game/Public/Actors/Ball.h"
 #include "Game/Public/Actors/Box.h"
+#include "Game/Public/Actors/Text.h"
+#include "Game/Public/Components/TextRenderComponent.h"
+#include "Game/Public/Components/CircleColliderComponent.h"
 #include "Game/Public/ComponentTypes.h"
 #include "Game/Public/Subsystems/PhysicsSystem.h"
 #include "Game/Public/Subsystems/RenderSystem.h"
-#include "Game/Public/Actors/Text.h"
+
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
 
@@ -82,11 +85,28 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	mBox->BeginPlay();
 	mBox->AddComponentOfType<Component>();*/
 
-	
+	// Create a Text actor and begin play (score display)
 	exVector2 textPos{ 50.0f, 20.0f };
 	exColor textColor{ 255, 255, 255, 255 };
-	mText = std::make_shared<Text>(std::string("Score: "), textColor, mFontID, textPos);
+	mText = std::make_shared<Text>(std::string("Score: 0"), textColor, mFontID, textPos);
 	mText->BeginPlay();
+
+	// Register score increment on collision: register only one collider so each collision counts once
+	if (std::shared_ptr<CircleColliderComponent> Collider = mBall_First->GetComponentOfType<CircleColliderComponent>())
+	{
+		// Need an lvalue to pass by non-const ref
+		CollisionEventSignature ScoreDelegate = [this](std::weak_ptr<Actor>, const exVector2)
+			{
+				++mScore;
+				if (std::shared_ptr<TextRenderComponent> TextComp = mText->GetComponentOfType<TextRenderComponent>())
+				{
+					std::string s = "Score: " + std::to_string(mScore);
+					TextComp->SetText(s);
+				}
+			};
+
+		Collider->ListenForCollision(ScoreDelegate);
+	}
 }
 
 //-----------------------------------------------------------------

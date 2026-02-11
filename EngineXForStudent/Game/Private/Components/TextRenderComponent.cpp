@@ -1,6 +1,5 @@
 #include "Game/Public/Components/TextRenderComponent.h"
 #include "Engine/Public/EngineInterface.h"
-#include "Game/Public/Components/TransformComponent.h"
 #include "Game/Public/Actor.h"
 
 void TextRenderComponent::Render(exEngineInterface* EngineInterface)
@@ -33,4 +32,9 @@ TextRenderComponent::TextRenderComponent(std::weak_ptr<Actor> owner, exColor Ren
 	, mText(Text)
 	, mOffset(Offset)
 {
+}
+
+void TextRenderComponent::SetText(const std::string& Text)
+{
+	mText = Text;
 }
