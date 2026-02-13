@@ -150,6 +150,7 @@
     <ClInclude Include="Game\Public\Actors\Ball.h" />
     <ClInclude Include="Game\Public\Actors\Box.h" />
     <ClInclude Include="Game\Public\Component.h" />
+    <ClInclude Include="Game\Public\Components\BoxColliderComponent.h" />
     <ClInclude Include="Game\Public\Components\BoxRenderComponent.h" />
     <ClInclude Include="Game\Public\Components\CircleColliderComponent.h" />
     <ClInclude Include="Game\Public\Components\CircleRenderComponent.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="Game\Private\Actor.cpp" />
     <ClCompile Include="Game\Private\Actors\Ball.cpp" />
     <ClCompile Include="Game\Private\Component.cpp" />
+    <ClCompile Include="Game\Private\Components\BoxColliderComponent.cpp" />
     <ClCompile Include="Game\Private\Components\BoxRenderComponent.cpp" />
     <ClCompile Include="Game\Private\Game.cpp" />
     <ClCompile Include="Game\Private\Main.cpp" />
