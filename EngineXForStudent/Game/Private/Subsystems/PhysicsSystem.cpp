@@ -50,7 +50,6 @@ void PhysicsEngine::PhysicsUpdate(const float DeltaTime)
 					std::shared_ptr<PhysicsComponent> secondPhysicsComponentToCheck = secondPhysicsComponentIt->lock();
 					if (firstPhysicsComponentToCheck->IsCollisionDetected(*secondPhysicsComponentIt))
 					{
-						// TODO: Write function to get hit
 						firstPhysicsComponentToCheck->BroadcastCollisionEvent(secondPhysicsComponentToCheck->GetOwner(), { 0.0f, 0.0f }); // 0 is placeholder!!
 						secondPhysicsComponentToCheck->BroadcastCollisionEvent(firstPhysicsComponentToCheck->GetOwner(), { 0.0f, 0.0f });
 						

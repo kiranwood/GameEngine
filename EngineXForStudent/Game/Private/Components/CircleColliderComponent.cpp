@@ -49,6 +49,7 @@ bool CircleColliderComponent::IsCollisionDetected(std::weak_ptr<PhysicsComponent
 	PhysicsComponent::IsCollisionDetected(otherComponent);
 }
 
+// Resolution for Circle
 void CircleColliderComponent::CollisionResolution()
 {
 	exVector2 CurrentVelocity = GetVelocity();
