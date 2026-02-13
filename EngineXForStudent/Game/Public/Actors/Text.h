@@ -9,10 +9,11 @@ public:
 	Text() = delete;
 	Text(const std::string& InText, exColor InColor, int InFontID, exVector2 InPosition);
 	virtual void BeginPlay() override;
+	virtual void EndPlay() override;
 
 private:
 	std::string mText;
 	exColor mColor;
-	int mFontID;
+	int mFontID; // Font ID from engine
 	exVector2 mPosition;
 };

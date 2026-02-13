@@ -18,7 +18,7 @@ protected:
 	TextRenderComponent(std::weak_ptr<Actor> owner, exColor RenderColor, int FontID, const std::string& Text, exVector2 Offset = { 0.0f, 0.0f });
 
 private:
-	int mFontID;
+	int mFontID; // Font ID from engine
 	std::string mText;
 	exVector2 mOffset;
 };
