@@ -1,22 +1,25 @@
 ﻿  Scanning sources for module dependencies...
+  TransformComponent.h
+  Compiling...
+  TransformComponent.h
   Actor.cpp
   Ball.cpp
-  Box.cpp
   Component.cpp
+  BoxColliderComponent.cpp
   BoxRenderComponent.cpp
-  CircleColliderComponent.cpp
-  CircleRenderComponent.cpp
-  PhysicsComponent.cpp
-  RenderComponent.cpp
-  TransformComponent.cpp
   Game.cpp
   Main.cpp
-  PhysicsSystem.cpp
+  TransformComponent.cpp
+  RenderComponent.cpp
+  CircleRenderComponent.cpp
+  PhysicsComponent.cpp
+  Box.cpp
+  CircleColliderComponent.cpp
   RenderSystem.cpp
+  PhysicsSystem.cpp
   Generating Code...
-C:\Users\pg29kiran\Documents\GameEngine\EngineXForStudent\Game\Private\Components\CircleColliderComponent.cpp(50,1): warning C4715: 'CircleColliderComponent::IsCollisionDetected': not all control paths return a value
-  LINK : Build\GameEngineXd.exe not found or not built by the last incremental link; performing full link
-EngineXd.lib(Engine.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineXd.lib(Engine.obj)' or at 'C:\Users\pg29kiran\Documents\GameEngine\EngineXForStudent\Build\EngineX.pdb'; linking object as if no debug info
-EngineXd.lib(RenderPacket.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineXd.lib(RenderPacket.obj)' or at 'C:\Users\pg29kiran\Documents\GameEngine\EngineXForStudent\Build\EngineX.pdb'; linking object as if no debug info
-EngineXd.lib(System.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineXd.lib(System.obj)' or at 'C:\Users\pg29kiran\Documents\GameEngine\EngineXForStudent\Build\EngineX.pdb'; linking object as if no debug info
-  GameEngineX.vcxproj -> C:\Users\pg29kiran\Documents\GameEngine\EngineXForStudent\Build\GameEngineXd.exe
+C:\Users\Kiran\VFS 2025\Term 3\Advanced OOP in C++\A4 - Arcade Game\GameEngine\EngineXForStudent\Game\Private\Components\CircleColliderComponent.cpp(50,1): warning C4715: 'CircleColliderComponent::IsCollisionDetected': not all control paths return a value
+EngineXd.lib(Engine.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineXd.lib(Engine.obj)' or at 'C:\Users\Kiran\VFS 2025\Term 3\Advanced OOP in C++\A4 - Arcade Game\GameEngine\EngineXForStudent\Build\EngineX.pdb'; linking object as if no debug info
+EngineXd.lib(RenderPacket.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineXd.lib(RenderPacket.obj)' or at 'C:\Users\Kiran\VFS 2025\Term 3\Advanced OOP in C++\A4 - Arcade Game\GameEngine\EngineXForStudent\Build\EngineX.pdb'; linking object as if no debug info
+EngineXd.lib(System.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineXd.lib(System.obj)' or at 'C:\Users\Kiran\VFS 2025\Term 3\Advanced OOP in C++\A4 - Arcade Game\GameEngine\EngineXForStudent\Build\EngineX.pdb'; linking object as if no debug info
+  GameEngineX.vcxproj -> C:\Users\Kiran\VFS 2025\Term 3\Advanced OOP in C++\A4 - Arcade Game\GameEngine\EngineXForStudent\Build\GameEngineXd.exe

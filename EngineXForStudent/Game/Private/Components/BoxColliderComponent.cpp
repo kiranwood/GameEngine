@@ -42,7 +42,12 @@ bool BoxColliderComponent::IsCollisionDetected(std::weak_ptr<PhysicsComponent>& 
 			else if (otherCenterPos.x > (selfCenterPos.x + mWidth)) testPos.x = selfCenterPos.x + mWidth;
 
 			if (otherCenterPos.y < selfCenterPos.y) testPos.y = selfCenterPos.y;
-			
+			else if (otherCenterPos.y > (selfCenterPos.y + mHeight)) testPos.y = selfCenterPos.y + mHeight;
+
+			exVector2 length = otherCenterPos - testPos;
+			float distanceSquared = (length.x * length.x) + (length.y * length.y);
+			float radiusSum = OtherCircleColliderComponent->GetRadius() * OtherCircleColliderComponent->GetRadius();
+			return (distanceSquared <= radiusSum);
 		}
 	}
 
@@ -51,5 +56,6 @@ bool BoxColliderComponent::IsCollisionDetected(std::weak_ptr<PhysicsComponent>& 
 
 void BoxColliderComponent::CollisionResolution()
 {
+
 }
 
