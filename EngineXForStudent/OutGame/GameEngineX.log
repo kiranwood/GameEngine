@@ -1,12 +1,14 @@
 ﻿  Scanning sources for module dependencies...
-  TransformComponent.h
+  TextRenderComponent.h
   Compiling...
-  TransformComponent.h
+  TextRenderComponent.h
   Actor.cpp
   Ball.cpp
+  Text.cpp
   Component.cpp
   BoxColliderComponent.cpp
   BoxRenderComponent.cpp
+  TextRenderComponent.cpp
   Game.cpp
   Main.cpp
   TransformComponent.cpp
@@ -15,10 +17,12 @@
   PhysicsComponent.cpp
   Box.cpp
   CircleColliderComponent.cpp
+  GameManagerSystem.cpp
   RenderSystem.cpp
   PhysicsSystem.cpp
   Generating Code...
 C:\Users\Kiran\VFS 2025\Term 3\Advanced OOP in C++\A4 - Arcade Game\GameEngine\EngineXForStudent\Game\Private\Components\CircleColliderComponent.cpp(50,1): warning C4715: 'CircleColliderComponent::IsCollisionDetected': not all control paths return a value
+  LINK : Build\GameEngineXd.exe not found or not built by the last incremental link; performing full link
 EngineXd.lib(Engine.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineXd.lib(Engine.obj)' or at 'C:\Users\Kiran\VFS 2025\Term 3\Advanced OOP in C++\A4 - Arcade Game\GameEngine\EngineXForStudent\Build\EngineX.pdb'; linking object as if no debug info
 EngineXd.lib(RenderPacket.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineXd.lib(RenderPacket.obj)' or at 'C:\Users\Kiran\VFS 2025\Term 3\Advanced OOP in C++\A4 - Arcade Game\GameEngine\EngineXForStudent\Build\EngineX.pdb'; linking object as if no debug info
 EngineXd.lib(System.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineXd.lib(System.obj)' or at 'C:\Users\Kiran\VFS 2025\Term 3\Advanced OOP in C++\A4 - Arcade Game\GameEngine\EngineXForStudent\Build\EngineX.pdb'; linking object as if no debug info

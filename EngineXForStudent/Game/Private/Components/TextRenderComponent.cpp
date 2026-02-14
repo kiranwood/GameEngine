@@ -1,40 +1,47 @@
 #include "Game/Public/Components/TextRenderComponent.h"
 #include "Engine/Public/EngineInterface.h"
 #include "Game/Public/Actor.h"
+#include "Game/Public/Components/TransformComponent.h"
+
+TextRenderComponent::TextRenderComponent(std::weak_ptr<Actor> owner,
+    exColor RenderColor,
+    const std::string& Text,
+    int FontID,
+    exVector2 Offset,
+    int Layer)
+    : RenderComponent(owner, RenderColor)
+    , mText(Text)
+    , mFontID(FontID)
+    , mOffset(Offset)
+    , mLayer(Layer)
+{
+}
 
 void TextRenderComponent::Render(exEngineInterface* EngineInterface)
 {
-	if (!EngineInterface)
-		return;
+    // Defensive checks: if the engine or font is invalid, do nothing.
+    if (!EngineInterface) return;
+    if (mFontID < 0) return;
 
-	if (mOwner.expired())
-		return;
+    // Default position if cannot resolve the owner's transform.
+    exVector2 pos = { 0.0f, 0.0f };
 
-	if (std::shared_ptr<Actor> owner = mOwner.lock())
-	{
-		exVector2 pos = { 0.0f, 0.0f };
-		if (std::shared_ptr<TransformComponent> TransformComp = owner->GetComponentOfType<TransformComponent>())
-		{
-			pos = TransformComp->GetLocation();
-		}
+    // lock owner -> fetch TransformComponent -> read location.
+    if (!mOwner.expired())
+    {
+        if (std::shared_ptr<Actor> owner = mOwner.lock())
+        {
+            if (std::shared_ptr<TransformComponent> tr = owner->GetComponentOfType<TransformComponent>())
+            {
+                pos = tr->GetLocation();
+            }
+        }
+    }
 
-		// apply local offset
-		pos.x += mOffset.x;
-		pos.y += mOffset.y;
+    // Apply local offset
+    pos.x += mOffset.x;
+    pos.y += mOffset.y;
 
-		EngineInterface->DrawText(mFontID, pos, mText.c_str(), mRenderColor, 1);
-	}
-}
-
-TextRenderComponent::TextRenderComponent(std::weak_ptr<Actor> owner, exColor RenderColor, int FontID, const std::string& Text, exVector2 Offset)
-	: RenderComponent(owner, RenderColor)
-	, mFontID(FontID)
-	, mText(Text)
-	, mOffset(Offset)
-{
-}
-
-void TextRenderComponent::SetText(const std::string& Text)
-{
-	mText = Text;
+    // EngineInterface signature
+    EngineInterface->DrawText(mFontID, pos, mText.c_str(), mRenderColor, mLayer);
 }

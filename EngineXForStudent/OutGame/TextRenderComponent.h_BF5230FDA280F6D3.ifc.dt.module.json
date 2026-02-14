@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "OutGame\\TextRenderComponent.obj",
+            "outputs": [
+                "OutGame\\TextRenderComponent.h_BF5230FDA280F6D3.ifc.dt.module.json",
+                "OutGame\\TextRenderComponent.h_BF5230FDA280F6D3.ifc.dt.d.json",
+                "OutGame\\TextRenderComponent.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Users\\Kiran\\VFS 2025\\Term 3\\Advanced OOP in C++\\A4 - Arcade Game\\GameEngine\\EngineXForStudent\\Game\\Public\\Components\\TextRenderComponent.h",
+                    "source-path": "c:\\users\\kiran\\vfs 2025\\term 3\\advanced oop in c++\\a4 - arcade game\\gameengine\\enginexforstudent\\game\\public\\components\\textrendercomponent.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}
