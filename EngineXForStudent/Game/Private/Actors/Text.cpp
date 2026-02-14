@@ -16,13 +16,13 @@ void Text::BeginPlay()
 	AddComponentOfType<TransformComponent>(mPosition);
 
 	// Add text render component (color, font id, text, optional offset)
-	AddComponentOfType<TextRenderComponent>(mColor, mFontID, mText, exVector2{ 0.0f, 0.0f });
+	AddComponentOfType<TextRenderComponent>(mColor, mText, mFontID, exVector2{ 0.0f, 0.0f });
 }
 
 void Text::EndPlay()
 {
 	AddComponentOfType<TransformComponent>(mPosition);
 
-	AddComponentOfType<TextRenderComponent>(mColor, mFontID, mText, exVector2{ 0.0f, 0.0f });
+	AddComponentOfType<TextRenderComponent>(mColor, mText, mFontID, exVector2{ 0.0f, 0.0f });
 
 }
