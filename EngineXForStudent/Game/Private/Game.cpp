@@ -185,17 +185,23 @@ void MyGame::Run( float fDeltaT ) // How much time between frames
 		// Update score text
 		if (mScoreText)
 		{
+			// When score changes:
 			std::string scoreStr = "Score: " + std::to_string(mGameManager->GetScore());
-			mScoreText->SetText(scoreStr);
+
+			// For score text
+			exColor scoreTextColor = {255, 255, 255, 255}; 
+			exVector2 scoreTextPos = {50.0f, 20.0f};      
+			mScoreText = std::make_shared<Text>(scoreStr, scoreTextColor, mFontID, scoreTextPos);
+			mScoreText->BeginPlay();
 		}
 		// Show game over text if needed
 		if (mGameManager->IsGameOver())
 		{
-			if (mGameOverText)
-			{
-				mGameOverText->SetText("Game Over!");
-				mGameOverText->BeginPlay();
-			}
+			// For game over text
+			exColor goTextColor = {255, 50, 50, 255};     
+			exVector2 gameOverPos = {225.0f, 250.0f};    
+			mGameOverText = std::make_shared<Text>("Game Over!", goTextColor, mBigFontID, gameOverPos);
+			mGameOverText->BeginPlay();
 			mIsGameOver = true;
 		}
 	}
