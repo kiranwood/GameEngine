@@ -46,7 +46,8 @@ bool CircleColliderComponent::IsCollisionDetected(std::weak_ptr<PhysicsComponent
 		}
 	}
 
-	PhysicsComponent::IsCollisionDetected(otherComponent);
+	// Call base and return its result
+	return PhysicsComponent::IsCollisionDetected(otherComponent);
 }
 
 // Resolution for Circle

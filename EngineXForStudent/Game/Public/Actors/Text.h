@@ -11,6 +11,9 @@ public:
 	virtual void BeginPlay() override;
 	virtual void EndPlay() override;
 
+	// Add SetText for runtime text update
+	void SetText(const std::string& NewText);
+
 private:
 	std::string mText;
 	exColor mColor;

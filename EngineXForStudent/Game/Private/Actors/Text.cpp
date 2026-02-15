@@ -26,3 +26,13 @@ void Text::EndPlay()
 	AddComponentOfType<TextRenderComponent>(mColor, mText, mFontID, exVector2{ 0.0f, 0.0f });
 
 }
+
+void Text::SetText(const std::string& NewText)
+{
+	mText = NewText;
+	// Optionally update the TextRenderComponent if it exists
+	if (auto textComp = GetComponentOfType<TextRenderComponent>())
+	{
+		textComp->SetText(mText);
+	}
+}

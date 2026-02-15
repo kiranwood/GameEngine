@@ -9,11 +9,13 @@
 #include "Game/Public/Utils.h"
 #include "Game/Public/GameInterface.h"
 #include "Engine/Public/EngineTypes.h"
+#include <memory>
 
 class Ball;
 class Box;
 class Text;
 class Actor;
+class GameManagerSystem;
 
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
@@ -66,4 +68,7 @@ private:
 
 	// runtime helpers
 	float						mBallRadius;
+
+	// Add GameManagerSystem pointer
+	std::unique_ptr<GameManagerSystem> mGameManager;
 };
