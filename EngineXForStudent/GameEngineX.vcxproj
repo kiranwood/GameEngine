@@ -151,7 +151,7 @@
     <ClInclude Include="Game\Public\Actors\Box.h" />
     <ClInclude Include="Game\Public\Actors\Line.h" />
     <ClInclude Include="Game\Public\Actors\Text.h" />
-    <ClInclude Include="Game\Public\Actors\Trigger.h" />
+    <ClInclude Include="Game\Public\Actors\BoxTrigger.h" />
     <ClInclude Include="Game\Public\Component.h" />
     <ClInclude Include="Game\Public\Components\BoxColliderComponent.h" />
     <ClInclude Include="Game\Public\Components\BoxRenderComponent.h" />
