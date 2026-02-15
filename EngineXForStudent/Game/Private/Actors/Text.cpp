@@ -27,12 +27,3 @@ void Text::EndPlay()
 
 }
 
-void Text::SetText(const std::string& NewText)
-{
-	mText = NewText;
-	// Optionally update the TextRenderComponent if it exists
-	if (auto textComp = GetComponentOfType<TextRenderComponent>())
-	{
-		textComp->SetText(mText);
-	}
-}
