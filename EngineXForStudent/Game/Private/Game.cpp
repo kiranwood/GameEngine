@@ -19,6 +19,7 @@
 #include "Game/Public/ComponentTypes.h"
 #include "Game/Public/Subsystems/PhysicsSystem.h"
 #include "Game/Public/Subsystems/RenderSystem.h"
+#include "Game/Public/Subsystems/GameManagerSystem.h"
 
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
@@ -37,6 +38,7 @@ MyGame::MyGame()
 	, mScore(0)
 	, mIsGameOver(false)
 	, mBallRadius(0.0f)
+	, mGameManager(nullptr)
 {
 }
 
@@ -90,8 +92,9 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	// Score trigger: spawn invisible trigger ball
 	exVector2 scorePos{ 200.0f, 200.0f };
 	exColor triggerColor{ 0, 0, 0, 0 }; // invisible
-	
 
+	// Initialize GameManagerSystem
+	mGameManager = std::make_unique<GameManagerSystem>(this);
 }
 
 //-----------------------------------------------------------------
@@ -174,4 +177,42 @@ void MyGame::Run( float fDeltaT ) // How much time between frames
 	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
 
 	RENDER_ENGINE.RenderUpdate(mEngine);
+
+	// Game manager update (score/game over logic)
+	if (mGameManager)
+	{
+		mGameManager->GameUpdate(fDeltaT);
+		// Update score text
+		if (mScoreText)
+		{
+			// When score changes:
+			std::string scoreStr = "Score: " + std::to_string(mGameManager->GetScore());
+
+			// For score text
+			exColor scoreTextColor = {255, 255, 255, 255}; 
+			exVector2 scoreTextPos = {50.0f, 20.0f};      
+			mScoreText = std::make_shared<Text>(scoreStr, scoreTextColor, mFontID, scoreTextPos);
+			mScoreText->BeginPlay();
+		}
+		// Show game over text if needed
+		if (mGameManager->IsGameOver())
+		{
+			// For game over text
+			exColor goTextColor = {255, 50, 50, 255};     
+			exVector2 gameOverPos = {225.0f, 250.0f};    
+			mGameOverText = std::make_shared<Text>("Game Over!", goTextColor, mBigFontID, gameOverPos);
+			mGameOverText->BeginPlay();
+			mIsGameOver = true;
+		}
+	}
+}
+
+std::shared_ptr<Ball> MyGame::GetPlayerBall() const
+{
+    return mBall_First;
+}
+
+float MyGame::GetBallRadius() const
+{
+    return mBallRadius;
 }

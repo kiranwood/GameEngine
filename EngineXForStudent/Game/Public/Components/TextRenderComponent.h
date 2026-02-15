@@ -16,6 +16,9 @@ public:
     // Uses EngineInterface->DrawText(...) to draw the stored string.
     virtual void Render(exEngineInterface* EngineInterface) override;
 
+    // Add SetText for runtime updates
+    void SetText(const std::string& NewText) { mText = NewText; }
+
 protected:
     // Owner is injected by Actor; FontID must come from EngineInterface->LoadFont(...).
     TextRenderComponent(std::weak_ptr<Actor> owner,

@@ -26,3 +26,4 @@ void Text::EndPlay()
 	AddComponentOfType<TextRenderComponent>(mColor, mText, mFontID, exVector2{ 0.0f, 0.0f });
 
 }
+

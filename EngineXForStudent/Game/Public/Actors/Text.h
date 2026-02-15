@@ -11,9 +11,11 @@ public:
 	virtual void BeginPlay() override;
 	virtual void EndPlay() override;
 
+
 private:
 	std::string mText;
 	exColor mColor;
 	int mFontID; // Font ID from engine
 	exVector2 mPosition;
+
 };
