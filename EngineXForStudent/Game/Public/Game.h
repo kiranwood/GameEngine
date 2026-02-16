@@ -15,7 +15,10 @@ class Ball;
 class Box;
 class Text;
 class Actor;
+class BoxTrigger;
+class BottomPipeSection;
 class GameManagerSystem;
+class Pipe;
 
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
@@ -55,9 +58,9 @@ private:
 
 	exVector2					mTextPosition;
 	std::shared_ptr<Ball>		mBall_First;
-	std::shared_ptr<Ball>		mScoreBall;
-	std::shared_ptr<Ball>		mGameOverBall;
 	std::shared_ptr<Box>		mBox;
+	std::shared_ptr<BoxTrigger> mTrigger;
+	std::shared_ptr<Pipe>		mPipe;
 
 	// separate text actors
 	std::shared_ptr<Text>		mScoreText;

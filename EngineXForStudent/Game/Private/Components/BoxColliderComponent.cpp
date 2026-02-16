@@ -35,7 +35,9 @@ bool BoxColliderComponent::IsCollisionDetected(std::weak_ptr<PhysicsComponent>& 
 				}
 			}
 
-			exVector2 testPos;
+			exVector2 testPos = otherCenterPos;
+			selfCenterPos.x = otherCenterPos.x - (mWidth / 2);
+			selfCenterPos.y = otherCenterPos.y - (mHeight / 2);
 
 			// Calculates which side of the square the circle is colliding with
 			if (otherCenterPos.x < selfCenterPos.x) testPos.x = selfCenterPos.x;
@@ -47,7 +49,7 @@ bool BoxColliderComponent::IsCollisionDetected(std::weak_ptr<PhysicsComponent>& 
 			exVector2 length = otherCenterPos - testPos;
 			float distanceSquared = (length.x * length.x) + (length.y * length.y);
 			float radiusSum = OtherCircleColliderComponent->GetRadius() * OtherCircleColliderComponent->GetRadius();
-			return (distanceSquared <= radiusSum);
+			return (distanceSquared < radiusSum);
 		}
 	}
 
@@ -57,5 +59,15 @@ bool BoxColliderComponent::IsCollisionDetected(std::weak_ptr<PhysicsComponent>& 
 void BoxColliderComponent::CollisionResolution()
 {
 
+}
+
+float BoxColliderComponent::GetWidth()
+{
+	return mWidth;
+}
+
+float BoxColliderComponent::GetHeight()
+{
+	return mHeight;
 }
 

@@ -19,7 +19,7 @@ public:
 #pragma endregion
 	virtual void Render(exEngineInterface* EngineInterface);
 
-private:
+protected:
 	// Stores all the components
 	ComponentList mComponents;
 

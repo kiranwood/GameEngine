@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -148,10 +148,13 @@
     <ClInclude Include="Engine\Public\EngineTypes.h" />
     <ClInclude Include="Engine\Public\SDL.h" />
     <ClInclude Include="Game\Public\Actors\Ball.h" />
+    <ClInclude Include="Game\Public\Actors\BottomPipeSection.h" />
     <ClInclude Include="Game\Public\Actors\Box.h" />
     <ClInclude Include="Game\Public\Actors\Line.h" />
+    <ClInclude Include="Game\Public\Actors\Pipe.h" />
     <ClInclude Include="Game\Public\Actors\Text.h" />
     <ClInclude Include="Game\Public\Actors\BoxTrigger.h" />
+    <ClInclude Include="Game\Public\Actors\TopPipeSection.h" />
     <ClInclude Include="Game\Public\Component.h" />
     <ClInclude Include="Game\Public\Components\BoxColliderComponent.h" />
     <ClInclude Include="Game\Public\Components\BoxRenderComponent.h" />
@@ -172,6 +175,7 @@
   <ItemGroup>
     <ClCompile Include="Game\Private\Actor.cpp" />
     <ClCompile Include="Game\Private\Actors\Ball.cpp" />
+    <ClCompile Include="Game\Private\Actors\BottomPipeSection.cpp" />
     <ClCompile Include="Game\Private\Actors\Line.cpp" />
     <ClCompile Include="Game\Private\Actors\Text.cpp" />
     <ClCompile Include="Game\Private\Component.cpp" />
@@ -189,6 +193,9 @@
     <ClCompile Include="Game\Private\Components\CircleColliderComponent.cpp" />
     <ClCompile Include="Game\Private\Subsystems\GameManagerSystem.cpp" />
     <ClCompile Include="Game\Private\Subsystems\RenderSystem.cpp" />
+    <ClCompile Include="Game\Private\Actors\BoxTrigger.cpp" />
+    <ClCompile Include="Game\Private\Actors\TopPipeSection.cpp" />
+    <ClCompile Include="Game\Private\Actors\Pipe.cpp" />
     <ClCompile Include="Game\Public\Components\TextRenderComponent.h" />
     <ClCompile Include="Game\Public\Components\TransformComponent.h" />
     <ClCompile Include="Game\Private\Subsystems\PhysicsSystem.cpp" />

@@ -15,6 +15,9 @@ public:
 	virtual bool IsCollisionDetected(std::weak_ptr<PhysicsComponent>& otherComponent);
 	virtual void CollisionResolution() override;
 
+	float GetWidth();
+	float GetHeight();
+
 
 private:
 

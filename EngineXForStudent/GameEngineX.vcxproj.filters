@@ -50,6 +50,14 @@
     <ClInclude Include="Game\Public\Components\CircleColliderComponent.h" />
     <ClInclude Include="Game\Public\Subsystems\RenderSystem.h" />
     <ClInclude Include="Game\Public\Components\BoxColliderComponent.h" />
+    <ClInclude Include="Game\Public\Actors\Line.h" />
+    <ClInclude Include="Game\Public\Actors\Text.h" />
+    <ClInclude Include="Game\Public\Actors\BoxTrigger.h" />
+    <ClInclude Include="Game\Public\Components\LineRenderComponent.h" />
+    <ClInclude Include="Game\Public\Subsystems\GameManagerSystem.h" />
+    <ClInclude Include="Game\Public\Actors\TopPipeSection.h" />
+    <ClInclude Include="Game\Public\Actors\BottomPipeSection.h" />
+    <ClInclude Include="Game\Public\Actors\Pipe.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\Private\Main.cpp">
@@ -98,6 +106,34 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\Private\Components\BoxColliderComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Actors\Line.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Actors\Text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Components\LineRenderComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Components\TextRenderComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Subsystems\GameManagerSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Actors\BoxTrigger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Public\Components\TextRenderComponent.h" />
+    <ClCompile Include="Game\Private\Actors\TopPipeSection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Actors\BottomPipeSection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Actors\Pipe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

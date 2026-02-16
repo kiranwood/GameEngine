@@ -14,6 +14,8 @@
 #include "Game/Public/Actors/Ball.h"
 #include "Game/Public/Actors/Box.h"
 #include "Game/Public/Actors/Text.h"
+#include "Game/Public/Actors/BoxTrigger.h"
+#include "Game/Public/Actors/Pipe.h"
 #include "Game/Public/Components/TextRenderComponent.h"
 #include "Game/Public/Components/CircleColliderComponent.h"
 #include "Game/Public/ComponentTypes.h"
@@ -64,17 +66,25 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	mTextPosition.x = 50.0f;
 	mTextPosition.y = 50.0f;
 
-	float Radius = 25.0f;
+	float Radius = 40.0f;
 	mBallRadius = Radius;
 
 	exColor Color1;
+	
+
 	Color1.mColor[0] = 255;
 	Color1.mColor[1] = 50;
 	Color1.mColor[2] = 150;
 	Color1.mColor[3] = 255;
 
 	// Player ball
-	mBall_First = Actor::SpawnActorOfType<Ball>(exVector2(200.0f, 300.0f), Radius, Color1);
+	mBall_First = Actor::SpawnActorOfType<Ball>(exVector2(200.0f, 350.0f), 2, Color1);
+
+	// Creates a random trigger
+
+	// Create Pipe
+	mPipe = Actor::SpawnActorOfType<Pipe>(exVector2(600.0f, 350.0f), exVector2(600, 350.0f), 1.0f);
+	mPipe.reset();
 
 	// Create the score text (top-left)
 	exVector2 scoreTextPos{ 50.0f, 20.0f };
@@ -150,6 +160,11 @@ void MyGame::Run( float fDeltaT ) // How much time between frames
 		mBall_First->Tick(fDeltaT);
 	}
 
+	if (mTrigger)
+	{
+		mTrigger->Tick(fDeltaT);
+	}
+
 	exVector2 BallVelocity(0.0f, 0.0f);
 
 	if (mUp)
@@ -174,37 +189,42 @@ void MyGame::Run( float fDeltaT ) // How much time between frames
 		}
 	}
 
+	if (mPipe)
+	{
+		mPipe->Tick(fDeltaT);
+	}
+
 	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
 
 	RENDER_ENGINE.RenderUpdate(mEngine);
 
 	// Game manager update (score/game over logic)
-	if (mGameManager)
-	{
-		mGameManager->GameUpdate(fDeltaT);
-		// Update score text
-		if (mScoreText)
-		{
-			// When score changes:
-			std::string scoreStr = "Score: " + std::to_string(mGameManager->GetScore());
+	//if (mGameManager)
+	//{
+	//	mGameManager->GameUpdate(fDeltaT);
+	//	// Update score text
+	//	if (mScoreText)
+	//	{
+	//		// When score changes:
+	//		std::string scoreStr = "Score: " + std::to_string(mGameManager->GetScore());
 
-			// For score text
-			exColor scoreTextColor = {255, 255, 255, 255}; 
-			exVector2 scoreTextPos = {50.0f, 20.0f};      
-			mScoreText = std::make_shared<Text>(scoreStr, scoreTextColor, mFontID, scoreTextPos);
-			mScoreText->BeginPlay();
-		}
-		// Show game over text if needed
-		if (mGameManager->IsGameOver())
-		{
-			// For game over text
-			exColor goTextColor = {255, 50, 50, 255};     
-			exVector2 gameOverPos = {225.0f, 250.0f};    
-			mGameOverText = std::make_shared<Text>("Game Over!", goTextColor, mBigFontID, gameOverPos);
-			mGameOverText->BeginPlay();
-			mIsGameOver = true;
-		}
-	}
+	//		// For score text
+	//		exColor scoreTextColor = {255, 255, 255, 255}; 
+	//		exVector2 scoreTextPos = {50.0f, 20.0f};      
+	//		mScoreText = std::make_shared<Text>(scoreStr, scoreTextColor, mFontID, scoreTextPos);
+	//		mScoreText->BeginPlay();
+	//	}
+	//	// Show game over text if needed
+	//	if (mGameManager->IsGameOver())
+	//	{
+	//		// For game over text
+	//		exColor goTextColor = {255, 50, 50, 255};     
+	//		exVector2 gameOverPos = {225.0f, 250.0f};    
+	//		mGameOverText = std::make_shared<Text>("Game Over!", goTextColor, mBigFontID, gameOverPos);
+	//		mGameOverText->BeginPlay();
+	//		mIsGameOver = true;
+	//	}
+	//}
 }
 
 std::shared_ptr<Ball> MyGame::GetPlayerBall() const

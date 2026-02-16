@@ -56,7 +56,7 @@ void PhysicsEngine::PhysicsUpdate(const float DeltaTime)
 						firstPhysicsComponentToCheck->CollisionResolution();
 						secondPhysicsComponentToCheck->CollisionResolution();
 
-						secondPhysicsComponentToCheck->DoPhysics();
+						//secondPhysicsComponentToCheck->DoPhysics();
 					}
 				}
 			}
