@@ -1,93 +1,72 @@
 #include "Game/Public/Subsystems/GameManagerSystem.h"
 #include "Game/Public/Game.h"
 #include "Game/Public/Actor.h"
-#include "Game/Public/Components/TextRenderComponent.h"
 #include "Game/Public/Actors/Ball.h"
-#include "Game/Public/Components/CircleColliderComponent.h"
+#include "Game/Public/Actors/Pipe.h"
+#include "Game/Public/Actors/BoxTrigger.h"
+#include "Game/Public/Actors/TopPipeSection.h"
+#include "Game/Public/Actors/BottomPipeSection.h"
+#include "Game/Public/Components/BoxColliderComponent.h"
 #include <memory>
 
 GameManagerSystem::GameManagerSystem(MyGame* game)
-	: mGame(game), mScore(0), mIsGameOver(false), mInitialized(false)
+	: mGame(game), mScore(0), mIsGameOver(false)
 {
 }
 
-void GameManagerSystem::GameUpdate(float DeltaTime)
+
+void GameManagerSystem::RegisterPipe(std::shared_ptr<Pipe> pipe)
 {
-	if (!mGame)
-		return;
+	if (!pipe) return;
 
-	// Lazy initialize triggers once
-	if (!mInitialized)
+	if (std::shared_ptr<BoxTrigger> trigger = pipe->GetTrigger())
 	{
-		std::shared_ptr<Ball> player = mGame->GetPlayerBall();
-		float radius = mGame->GetBallRadius();
-
-		if (!player || radius <= 0.0f)
+		if (std::shared_ptr<BoxColliderComponent> col =
+			trigger->GetComponentOfType<BoxColliderComponent>())
 		{
-			// wait until player exists and radius is set
-			return;
-		}
-
-		// Score trigger
-		{
-			exVector2 scorePos{ 400.0f, 200.0f };
-			std::shared_ptr<Actor> trigger = Actor::SpawnActorOfType<Actor>(scorePos);
-			if (trigger)
-			{
-				auto result = trigger->AddComponentOfType<CircleColliderComponent>(radius, exVector2{0.0f,0.0f}, true, false);
-				if (std::shared_ptr<CircleColliderComponent> Col = std::get<0>(result))
+			CollisionEventSignature onScore =
+				[this](std::weak_ptr<Actor> other, const exVector2)
 				{
-					CollisionEventSignature ScoreDelegate = [this](std::weak_ptr<Actor> OtherActor, const exVector2)
+					if (mIsGameOver) return;
+					if (other.expired()) return;
+					// Only score when it is the player ball
+					if (std::dynamic_pointer_cast<Ball>(other.lock()))
 					{
-						if (!mGame)
-							return;
-						if (OtherActor.expired())
-							return;
-						if (std::shared_ptr<Actor> other = OtherActor.lock())
-						{
-							if (std::dynamic_pointer_cast<Ball>(other) == mGame->GetPlayerBall())
-							{
-								AddScore(1);
-							}
-						}
-					};
-					Col->ListenForCollision(ScoreDelegate);
-				}
-				mScoreTriggers.push_back(trigger);
-			}
+						AddScore(1);
+					}
+				};
+			col->ListenForCollision(onScore);
 		}
-
-		// Game over trigger
-		{
-			exVector2 gameOverPos{ 400.0f, 400.0f };
-			std::shared_ptr<Actor> trigger = Actor::SpawnActorOfType<Actor>(gameOverPos);
-			if (trigger)
-			{
-				auto result = trigger->AddComponentOfType<CircleColliderComponent>(radius, exVector2{0.0f,0.0f}, true, false);
-				if (std::shared_ptr<CircleColliderComponent> Col = std::get<0>(result))
-				{
-					CollisionEventSignature GameOverDelegate = [this](std::weak_ptr<Actor> OtherActor, const exVector2)
-					{
-						if (!mGame)
-							return;
-						if (OtherActor.expired())
-							return;
-						if (std::shared_ptr<Actor> other = OtherActor.lock())
-						{
-							if (std::dynamic_pointer_cast<Ball>(other) == mGame->GetPlayerBall())
-							{
-								TriggerGameOver();
-							}
-						}
-					};
-					Col->ListenForCollision(GameOverDelegate);
-				}
-				mGameOverTriggers.push_back(trigger);
-			}
-		}
-
-		mInitialized = true;
 	}
+
+	// ---- Game-over triggers (top and bottom pipe sections) ----
+	auto registerGameOver = [this](std::shared_ptr<Actor> section)
+		{
+			if (!section) return;
+			if (std::shared_ptr<BoxColliderComponent> col =
+				section->GetComponentOfType<BoxColliderComponent>())
+			{
+				CollisionEventSignature onGameOver =
+					[this](std::weak_ptr<Actor> other, const exVector2)
+					{
+						if (mIsGameOver) return;
+						if (other.expired()) return;
+						if (std::dynamic_pointer_cast<Ball>(other.lock()))
+						{
+							TriggerGameOver();
+						}
+					};
+				col->ListenForCollision(onGameOver);
+			}
+		};
+
+	registerGameOver(pipe->GetTopPipe());
+	registerGameOver(pipe->GetBotPipe());
+}
+
+void GameManagerSystem::GameUpdate(float /*DeltaTime*/)
+{
+	// Future: spawn new pipes, reset on restart, etc.
 }
 
 void GameManagerSystem::AddScore(int amount)
@@ -105,6 +84,7 @@ void GameManagerSystem::ResetScore()
 	mScore = 0;
 }
 
+
 void GameManagerSystem::TriggerGameOver()
 {
 	mIsGameOver = true;
@@ -119,4 +99,3 @@ void GameManagerSystem::ResetGameOver()
 {
 	mIsGameOver = false;
 }
-
