@@ -22,6 +22,7 @@
 #include "Game/Public/Subsystems/PhysicsSystem.h"
 #include "Game/Public/Subsystems/RenderSystem.h"
 #include "Game/Public/Subsystems/GameManagerSystem.h"
+#include "Game/Public/Subsystems/PipeSpawner.h"
 
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
@@ -30,6 +31,12 @@ const char* gWindowName = "Sample EngineX Game";
 
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
+//-----------------------------------------------------------------
+
+static constexpr float kPipeSpeed = 1.5f;   // pixels per frame the pipe scrolls left
+static constexpr float kPipeSpawnInterval = 3.0f;   // seconds between new pipes
+static constexpr float kPipeSpawnX = 750.0f; // just off the right edge of the screen
+
 
 MyGame::MyGame()
 	: mEngine( nullptr )
@@ -41,6 +48,7 @@ MyGame::MyGame()
 	, mIsGameOver(false)
 	, mBallRadius(0.0f)
 	, mGameManager(nullptr)
+	, mPipeSpawner(nullptr)
 {
 }
 
@@ -70,8 +78,6 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	mBallRadius = Radius;
 
 	exColor Color1;
-	
-
 	Color1.mColor[0] = 255;
 	Color1.mColor[1] = 50;
 	Color1.mColor[2] = 150;
@@ -83,8 +89,8 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	// Creates a random trigger
 
 	// Create Pipe
-	mPipe = Actor::SpawnActorOfType<Pipe>(exVector2(600.0f, 350.0f), exVector2(600, 350.0f), 1.0f);
-	mPipe.reset();
+	//mPipe = Actor::SpawnActorOfType<Pipe>(exVector2(600.0f, 350.0f), exVector2(600, 350.0f), 1.0f);
+	//mPipe.reset();
 
 	// Create the score text (top-left)
 	exVector2 scoreTextPos{ 50.0f, 20.0f };
@@ -105,6 +111,18 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 
 	// Initialize GameManagerSystem
 	mGameManager = std::make_unique<GameManagerSystem>(this);
+	mPipeSpawner = std::make_unique<PipeSpawner>(
+		kPipeSpawnInterval,
+		kPipeSpeed,
+		kPipeSpawnX,
+		[this](std::shared_ptr<Pipe> newPipe)
+		{
+			if (mGameManager)
+			{
+				mGameManager->RegisterPipe(newPipe);
+			}
+		}
+	);
 }
 
 //-----------------------------------------------------------------
@@ -154,85 +172,102 @@ void MyGame::OnEventsConsumed()
 // Like update function. Runs every frame
 void MyGame::Run( float fDeltaT ) // How much time between frames
 {
-	// Tick only the player ball if it exists
+	// --- Player ball tick ---
 	if (mBall_First)
 	{
 		mBall_First->Tick(fDeltaT);
 	}
 
-	if (mTrigger)
-	{
-		mTrigger->Tick(fDeltaT);
-	}
-
-	exVector2 BallVelocity(0.0f, 0.0f);
-
-	if (mUp)
-	{
-		BallVelocity.y -= 2.5f;
-	}
-	if (mDown)
-	{
-		BallVelocity.y = 2.5f;
-	}
-	
-
-	// only allow player control while not game over
+	// --- Player input (only while alive) ---
 	if (!mIsGameOver)
 	{
+		exVector2 BallVelocity(0.0f, 0.0f);
+		if (mUp)   BallVelocity.y -= 2.5f;
+		if (mDown) BallVelocity.y = 2.5f;
+
 		if (mBall_First)
 		{
-			if (std::shared_ptr<PhysicsComponent> BallPhysicsComp = mBall_First->GetComponentOfType<PhysicsComponent>())
+			if (std::shared_ptr<PhysicsComponent> phys =
+				mBall_First->GetComponentOfType<PhysicsComponent>())
 			{
-				BallPhysicsComp->SetVelocity(BallVelocity);
+				phys->SetVelocity(BallVelocity);
 			}
 		}
 	}
 
-	if (mPipe)
+	// --- Pipe spawner: ticks all live pipes, removes off-screen ones,
+	//     and spawns new ones on the interval. Stops when game over. ---
+	if (mPipeSpawner)
 	{
-		mPipe->Tick(fDeltaT);
+		mPipeSpawner->Update(fDeltaT, mIsGameOver);
 	}
 
+	// --- Physics step (moves everything, fires collision events) ---
 	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
 
+	// --- Render step ---
 	RENDER_ENGINE.RenderUpdate(mEngine);
 
-	// Game manager update (score/game over logic)
-	//if (mGameManager)
-	//{
-	//	mGameManager->GameUpdate(fDeltaT);
-	//	// Update score text
-	//	if (mScoreText)
-	//	{
-	//		// When score changes:
-	//		std::string scoreStr = "Score: " + std::to_string(mGameManager->GetScore());
+	// --- Game manager: sync score text, detect game over ---
+	if (mGameManager)
+	{
+		mGameManager->GameUpdate(fDeltaT);
 
-	//		// For score text
-	//		exColor scoreTextColor = {255, 255, 255, 255}; 
-	//		exVector2 scoreTextPos = {50.0f, 20.0f};      
-	//		mScoreText = std::make_shared<Text>(scoreStr, scoreTextColor, mFontID, scoreTextPos);
-	//		mScoreText->BeginPlay();
-	//	}
-	//	// Show game over text if needed
-	//	if (mGameManager->IsGameOver())
-	//	{
-	//		// For game over text
-	//		exColor goTextColor = {255, 50, 50, 255};     
-	//		exVector2 gameOverPos = {225.0f, 250.0f};    
-	//		mGameOverText = std::make_shared<Text>("Game Over!", goTextColor, mBigFontID, gameOverPos);
-	//		mGameOverText->BeginPlay();
-	//		mIsGameOver = true;
-	//	}
-	//}
+		// Update score display when it changes
+		int currentScore = mGameManager->GetScore();
+		if (currentScore != mScore)
+		{
+			mScore = currentScore;
+			if (mScoreText)
+			{
+				if (std::shared_ptr<TextRenderComponent> textComp =
+					mScoreText->GetComponentOfType<TextRenderComponent>())
+				{
+					textComp->SetText("Score: " + std::to_string(mScore));
+				}
+			}
+		}
+
+		// Show "Game Over!" the first frame the condition is set
+		if (mGameManager->IsGameOver() && !mIsGameOver)
+		{
+			mIsGameOver = true;
+
+			exColor goTextColor{ 255, 50, 50, 255 };
+			mGameOverText = std::make_shared<Text>(
+				std::string("Game Over!"), goTextColor, mBigFontID, exVector2{ 225.0f, 250.0f });
+			mGameOverText->BeginPlay();
+		}
+	}
+}
+
+void MyGame::AddScore(int amount)
+{
+	if (mGameManager)
+	{
+		mGameManager->AddScore(amount);
+	}
+}
+
+void MyGame::TriggerGameOver()
+{
+	if (mGameManager)
+	{
+		mGameManager->TriggerGameOver();
+	}
 }
 
 std::shared_ptr<Ball> MyGame::GetPlayerBall() const
 {
-    return mBall_First;
+	return mBall_First;
 }
 
 float MyGame::GetBallRadius() const
 {
-    return mBallRadius;
+	return mBallRadius;
+}
+
+std::shared_ptr<Pipe> MyGame::GetPipe() const
+{
+	return mPipe;
 }
