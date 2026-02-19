@@ -18,6 +18,7 @@ class Actor;
 class BoxTrigger;
 class BottomPipeSection;
 class GameManagerSystem;
+class PipeSpawner;
 class Pipe;
 
 //-----------------------------------------------------------------
@@ -45,6 +46,7 @@ public:
 	void						TriggerGameOver();
 	std::shared_ptr<Ball>		GetPlayerBall() const;
 	float						GetBallRadius() const;
+	std::shared_ptr<Pipe>		GetPipe() const;
 
 private:
 
@@ -74,4 +76,5 @@ private:
 
 	// Add GameManagerSystem pointer
 	std::unique_ptr<GameManagerSystem> mGameManager;
+	std::unique_ptr<PipeSpawner> mPipeSpawner;
 };
