@@ -16,6 +16,7 @@
 #include "Game/Public/Actors/Text.h"
 #include "Game/Public/Actors/BoxTrigger.h"
 #include "Game/Public/Actors/Pipe.h"
+#include "Game/Public/Actors/Bird.h"
 #include "Game/Public/Components/TextRenderComponent.h"
 #include "Game/Public/Components/CircleColliderComponent.h"
 #include "Game/Public/ComponentTypes.h"
@@ -33,7 +34,7 @@ const char* gWindowName = "Sample EngineX Game";
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
 
-static constexpr float kPipeSpeed = 1.5f;   // pixels per frame the pipe scrolls left
+static constexpr float kPipeSpeed = 100.0f;   // pixels per frame the pipe scrolls left
 static constexpr float kPipeSpawnInterval = 3.0f;   // seconds between new pipes
 static constexpr float kPipeSpawnX = 750.0f; // just off the right edge of the screen
 
@@ -74,7 +75,7 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	mTextPosition.x = 50.0f;
 	mTextPosition.y = 50.0f;
 
-	float Radius = 40.0f;
+	float Radius = 15.0f;
 	mBallRadius = Radius;
 
 	exColor Color1;
@@ -84,13 +85,19 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	Color1.mColor[3] = 255;
 
 	// Player ball
-	mBall_First = Actor::SpawnActorOfType<Ball>(exVector2(200.0f, 350.0f), 2, Color1);
+	//mBall_First = Actor::SpawnActorOfType<Ball>(exVector2(200.0f, 350.0f), 2, Color1);
 
 	// Creates a random trigger
 
 	// Create Pipe
 	//mPipe = Actor::SpawnActorOfType<Pipe>(exVector2(600.0f, 350.0f), exVector2(600, 350.0f), 1.0f);
 	//mPipe.reset();
+
+	mBird = Actor::SpawnActorOfType<Bird>(
+		exVector2(kViewportWidth * 0.5f, kViewportHeight * 0.5f),
+		Radius,
+		Color1
+	);
 
 	// Create the score text (top-left)
 	exVector2 scoreTextPos{ 50.0f, 20.0f };
@@ -150,6 +157,13 @@ void MyGame::GetClearColor( exColor& color ) const
 
 void MyGame::OnEvent(SDL_Event* pEvent) // called for each event polled from SDL
 {
+	if (pEvent->type == SDL_KEYDOWN)
+	{
+		if (pEvent->key.keysym.scancode == SDL_SCANCODE_SPACE && pEvent->key.repeat == 0)
+		{
+			mInputMask |= INPUT_FLAP; // Performs OR operation
+		}
+	}
 }
 
 //-----------------------------------------------------------------
@@ -157,13 +171,6 @@ void MyGame::OnEvent(SDL_Event* pEvent) // called for each event polled from SDL
 
 void MyGame::OnEventsConsumed()
 {
-	int nKeys = 0;
-	const Uint8 *pState = SDL_GetKeyboardState( &nKeys );
-
-	// Uses bits
-	mUp = pState[SDL_SCANCODE_UP]; // Enum to be readable
-	mDown = pState[SDL_SCANCODE_DOWN];
-	
 }
 
 //-----------------------------------------------------------------
@@ -172,28 +179,14 @@ void MyGame::OnEventsConsumed()
 // Like update function. Runs every frame
 void MyGame::Run( float fDeltaT ) // How much time between frames
 {
-	// --- Player ball tick ---
-	if (mBall_First)
+	if (mInputMask & INPUT_FLAP)
 	{
-		mBall_First->Tick(fDeltaT);
+		if (mBird) mBird->Flap(); // If pointer exists, execute member method.
+		mInputMask &= ~INPUT_FLAP; // Clears mInputMask member.
 	}
 
-	// --- Player input (only while alive) ---
-	if (!mIsGameOver)
-	{
-		exVector2 BallVelocity(0.0f, 0.0f);
-		if (mUp)   BallVelocity.y -= 2.5f;
-		if (mDown) BallVelocity.y = 2.5f;
-
-		if (mBall_First)
-		{
-			if (std::shared_ptr<PhysicsComponent> phys =
-				mBall_First->GetComponentOfType<PhysicsComponent>())
-			{
-				phys->SetVelocity(BallVelocity);
-			}
-		}
-	}
+	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
+	RENDER_ENGINE.RenderUpdate(mEngine);
 
 	// --- Pipe spawner: ticks all live pipes, removes off-screen ones,
 	//     and spawns new ones on the interval. Stops when game over. ---
@@ -257,14 +250,14 @@ void MyGame::TriggerGameOver()
 	}
 }
 
-std::shared_ptr<Ball> MyGame::GetPlayerBall() const
+std::shared_ptr<Bird> MyGame::GetPlayerBall() const
 {
-	return mBall_First;
+	return mBird;
 }
 
 float MyGame::GetBallRadius() const
 {
-	return mBallRadius;
+	return 20.0f;
 }
 
 std::shared_ptr<Pipe> MyGame::GetPipe() const

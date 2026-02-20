@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "OutGame\\TextRenderComponent.obj",
+            "outputs": [
+                "OutGame\\TextRenderComponent.h_454FF83A53A43D82.ifc.dt.module.json",
+                "OutGame\\TextRenderComponent.h_454FF83A53A43D82.ifc.dt.d.json",
+                "OutGame\\TextRenderComponent.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Users\\pg29kiran\\Documents\\GameEngine\\EngineXForStudent\\Game\\Public\\Components\\TextRenderComponent.h",
+                    "source-path": "c:\\users\\pg29kiran\\documents\\gameengine\\enginexforstudent\\game\\public\\components\\textrendercomponent.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

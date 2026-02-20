@@ -9,6 +9,7 @@
 #include "Game/Public/Utils.h"
 #include "Game/Public/GameInterface.h"
 #include "Engine/Public/EngineTypes.h"
+
 #include <memory>
 
 class Ball;
@@ -20,6 +21,7 @@ class BottomPipeSection;
 class GameManagerSystem;
 class PipeSpawner;
 class Pipe;
+class Bird;
 
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
@@ -44,7 +46,7 @@ public:
 	// Game manager friendly APIs
 	void						AddScore(int amount = 1);
 	void						TriggerGameOver();
-	std::shared_ptr<Ball>		GetPlayerBall() const;
+	std::shared_ptr<Bird>		GetPlayerBall() const;
 	float						GetBallRadius() const;
 	std::shared_ptr<Pipe>		GetPipe() const;
 
@@ -77,4 +79,13 @@ private:
 	// Add GameManagerSystem pointer
 	std::unique_ptr<GameManagerSystem> mGameManager;
 	std::unique_ptr<PipeSpawner> mPipeSpawner;
+	
+	enum InputBits : unsigned char
+	{
+		INPUT_NONE = 0,
+		INPUT_FLAP = 1 << 0,
+	};
+
+	unsigned char mInputMask;
+	std::shared_ptr<Bird> mBird;
 };

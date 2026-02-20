@@ -1,7 +1,7 @@
 #include "Game/Public/Subsystems/GameManagerSystem.h"
 #include "Game/Public/Game.h"
 #include "Game/Public/Actor.h"
-#include "Game/Public/Actors/Ball.h"
+#include "Game/Public/Actors/Bird.h"
 #include "Game/Public/Actors/Pipe.h"
 #include "Game/Public/Actors/BoxTrigger.h"
 #include "Game/Public/Actors/TopPipeSection.h"
@@ -13,7 +13,6 @@ GameManagerSystem::GameManagerSystem(MyGame* game)
 	: mGame(game), mScore(0), mIsGameOver(false)
 {
 }
-
 
 void GameManagerSystem::RegisterPipe(std::shared_ptr<Pipe> pipe)
 {
@@ -30,7 +29,7 @@ void GameManagerSystem::RegisterPipe(std::shared_ptr<Pipe> pipe)
 					if (mIsGameOver) return;
 					if (other.expired()) return;
 					// Only score when it is the player ball
-					if (std::dynamic_pointer_cast<Ball>(other.lock()))
+					if (std::dynamic_pointer_cast<Bird>(other.lock()))
 					{
 						AddScore(1);
 					}
@@ -51,7 +50,7 @@ void GameManagerSystem::RegisterPipe(std::shared_ptr<Pipe> pipe)
 					{
 						if (mIsGameOver) return;
 						if (other.expired()) return;
-						if (std::dynamic_pointer_cast<Ball>(other.lock()))
+						if (std::dynamic_pointer_cast<Bird>(other.lock()))
 						{
 							TriggerGameOver();
 						}

@@ -5,14 +5,14 @@
         {
             "primary-output": "OutGame\\Pipespawner.h.obj",
             "outputs": [
-                "C:\\Users\\Public\\Repos\\GameEngine\\EngineXForStudent\\OutGame\\vc143.pdb",
+                "C:\\Users\\pg29kiran\\Documents\\GameEngine\\EngineXForStudent\\OutGame\\vc143.pdb",
                 "OutGame\\",
-                "C:\\Users\\Public\\Repos\\GameEngine\\EngineXForStudent\\OutGame\\Pipespawner.h.ifc"
+                "C:\\Users\\pg29kiran\\Documents\\GameEngine\\EngineXForStudent\\OutGame\\Pipespawner.h.ifc"
             ],
             "provides": [
                 {
                     "logical-name": "Game\\Public\\Subsystems\\Pipespawner.h",
-                    "source-path": "c:\\users\\public\\repos\\gameengine\\enginexforstudent\\game\\public\\subsystems\\pipespawner.h",
+                    "source-path": "c:\\users\\pg29kiran\\documents\\gameengine\\enginexforstudent\\game\\public\\subsystems\\pipespawner.h",
                     "lookup-method": "absolute"
                 }
             ],
