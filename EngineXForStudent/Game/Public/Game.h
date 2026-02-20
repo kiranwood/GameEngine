@@ -9,9 +9,10 @@
 #include "Game/Public/Utils.h"
 #include "Game/Public/GameInterface.h"
 #include "Engine/Public/EngineTypes.h"
+#include <memory>
 
 class Ball;
-class Line;
+class Bird;
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
 
@@ -38,11 +39,14 @@ private:
 
 	int							mFontID;
 
-	bool						mUp;
-	bool						mDown;
+	enum InputBits : unsigned char
+	{
+		INPUT_NONE = 0,
+		INPUT_FLAP = 1 << 0,
+	};
+
+	unsigned char mInputMask;
+	std::shared_ptr<Bird> mBird;
 
 	exVector2					mTextPosition;
-	std::shared_ptr<Ball>       mBall;
-
-	std::shared_ptr<Line>       mLine;
 };

@@ -34,17 +34,23 @@
     <ClInclude Include="Engine\Public\SDL.h">
       <Filter>Source Files\Engine\Public</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Public\Game.h">
+      <Filter>Source Files\Engine\Public</Filter>
+    </ClInclude>
     <ClInclude Include="Game\Public\Actor.h" />
     <ClInclude Include="Game\Public\Utils.h" />
-    <ClInclude Include="Game\Public\Game.h" />
     <ClInclude Include="Game\Public\LifetimeInterface.h" />
     <ClInclude Include="Game\Public\Actors\Ball.h" />
     <ClInclude Include="Game\Public\Component.h" />
     <ClInclude Include="Game\Public\ComponentTypes.h" />
+    <ClInclude Include="Game\Public\Components\TransformComponent.h" />
     <ClInclude Include="Game\Public\Components\RenderComponent.h" />
     <ClInclude Include="Game\Public\Components\CircleRenderComponent.h" />
     <ClInclude Include="Game\Public\Components\PhysicsComponent.h" />
     <ClInclude Include="Game\Public\Subsystems\PhysicsSystem.h" />
+    <ClInclude Include="Game\Public\Components\CircleColliderComponent.h" />
+    <ClInclude Include="Game\Public\Subsystems\RenderSystem.h" />
+    <ClInclude Include="Game\Public\Actors\Bird.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\Private\Main.cpp">
@@ -62,9 +68,6 @@
     <ClCompile Include="Game\Private\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Public\Components\TransformComponent.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Private\Components\TransformComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -80,18 +83,14 @@
     <ClCompile Include="Game\Private\Subsystems\PhysicsSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include=".gitignore" />
-    <None Include="Build\GameEngineXd.exe" />
-    <None Include="Build\GameEngineXd.pdb" />
-    <None Include="Build\libfreetype-6.dll" />
-    <None Include="Build\SDL2.dll" />
-    <None Include="Build\SDL2-gfx.dll" />
-    <None Include="Build\SDL2-ttf.dll" />
-    <None Include="Build\zlib1.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="Build\afternight.ttf" />
+    <ClCompile Include="Game\Private\Components\CircleColliderComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Subsystems\RenderSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Actors\Bird.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -11,22 +11,22 @@
 #include "Engine/Public/SDL.h"
 
 #include "Game/Public/Actors/Ball.h"
-#include "Game/Public/Actors/Line.h"
+#include "Game/Public/Actors/Bird.h"
 #include "Game/Public/ComponentTypes.h"
 #include "Game/Public/Subsystems/PhysicsSystem.h"
+#include "Game/Public/Subsystems/RenderSystem.h"
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
 
-const char* gWindowName = "Sample EngineX Game";
+const char* gWindowName = "PG29 Game Engine";
 
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
 
 MyGame::MyGame()
-	: mEngine( nullptr ) // Handle anything to do with rendering
-	, mFontID( -1 ) // Handle is a font id
-	, mUp( false )
-	, mDown( false )
+	: mEngine( nullptr )
+	, mFontID( -1 )
+	, mInputMask(0)
 {
 }
 
@@ -44,42 +44,35 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 {
 	mEngine = pEngine;
 
-	// You can load multiple fonts
-	mFontID = mEngine->LoadFont( "Resources/JosefinSans-Regular.ttf", 32 );
+	mFontID = mEngine->LoadFont( "Resources/afternight.ttf", 32 );
 
-	// Everything run from top left
 	mTextPosition.x = 50.0f;
 	mTextPosition.y = 50.0f;
 
-	float Radius = 50.0f;
-	exVector2 Center;
-	Center.x = 300;
-	Center.y = 400;
+	float Radius = 25.0f;
 
-	exColor Color;
-	Color.mColor[0] = 255;
-	Color.mColor[1] = 50;
-	Color.mColor[2] = 150;
-	Color.mColor[3] = 255;
+	exColor Color1;
+	Color1.mColor[0] = 255;
+	Color1.mColor[1] = 50;
+	Color1.mColor[2] = 150;
+	Color1.mColor[3] = 255;
 
-	mBall = std::make_shared<Ball>(Radius, Color);
-	mBall->BeginPlay();
-	mBall->AddComponentOfType<Component>();
-	//mBall->AddComponentOfType<TransformComponent>(Center);
+	exColor Color2;
+	Color2.mColor[0] = 255;
+	Color2.mColor[1] = 150;
+	Color2.mColor[2] = 50;
+	Color2.mColor[3] = 255;
 
-	// Create the Line actor
-	exVector2 lineStart{ 100.0f, 100.0f };
-	exVector2 lineEnd{ 400.0f, 300.0f };
-	exColor lineColor{ 255, 0, 0, 255 };
-
-	mLine = std::make_shared<Line>(lineStart, lineEnd, lineColor);
-	mLine->BeginPlay();
+	mBird = Actor::SpawnActorOfType<Bird>(
+		exVector2(kViewportWidth * 0.5f, kViewportHeight * 0.5f),
+		Radius,
+		Color1
+	);
 }
 
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
 
-// Whenever you play the game the window name will show
 const char* MyGame::GetWindowName() const
 {
 	return gWindowName;
@@ -88,7 +81,6 @@ const char* MyGame::GetWindowName() const
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
 
-// Can have RBG colour for anything
 void MyGame::GetClearColor( exColor& color ) const
 {
 	color.mColor[0] = 128;
@@ -101,6 +93,13 @@ void MyGame::GetClearColor( exColor& color ) const
 
 void MyGame::OnEvent( SDL_Event* pEvent )
 {
+	if (pEvent->type == SDL_KEYDOWN)
+	{
+		if (pEvent->key.keysym.scancode == SDL_SCANCODE_SPACE && pEvent->key.repeat == 0)
+		{
+			mInputMask |= INPUT_FLAP; // Performs OR operation
+		}
+	}
 }
 
 //-----------------------------------------------------------------
@@ -108,49 +107,20 @@ void MyGame::OnEvent( SDL_Event* pEvent )
 
 void MyGame::OnEventsConsumed()
 {
-	int nKeys = 0;
-	const Uint8 *pState = SDL_GetKeyboardState( &nKeys );
 
-	// Uses bits
-	mUp = pState[SDL_SCANCODE_UP]; // Enum to be readable
-	mDown = pState[SDL_SCANCODE_DOWN];
-	
 }
 
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
 
-// Like update function. Runs every frame
-void MyGame::Run( float fDeltaT ) // How much time between frames
+void MyGame::Run( float fDeltaT )
 {
-	if (std::shared_ptr<RenderComponent> RenderComp = mBall->GetComponentOfType<RenderComponent>())
+	if (mInputMask & INPUT_FLAP)
 	{
-		RenderComp->Render(mEngine);
-	}
-	mBall->Tick(fDeltaT);
-
-	exVector2 BallVelocity(0.0f, 0.0f);
-
-	if (mUp)
-	{
-		
-		BallVelocity.y -=2.5f;
-	}
-	if (mDown)
-	{
-		BallVelocity.y = 2.5f;
-	}
-
-	if (std::shared_ptr<PhysicsComponent> BallPhysicsComp = mBall->GetComponentOfType<PhysicsComponent>())
-	{
-		BallPhysicsComp->SetVelocity(BallVelocity);
-	}
-
-	// Render the Line
-	if (std::shared_ptr<RenderComponent> LineRenderComp = mLine->GetComponentOfType<RenderComponent>())
-	{
-		LineRenderComp->Render(mEngine);
+		if (mBird) mBird->Flap(); // If pointer exists, execute member method.
+		mInputMask &= ~INPUT_FLAP; // Clears mInputMask member.
 	}
 
 	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
+	RENDER_ENGINE.RenderUpdate(mEngine);
 }
