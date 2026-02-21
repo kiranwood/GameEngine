@@ -15,6 +15,7 @@ private:
 	float mWidth;
 	float mHeight;
 
-	// Box Color
+	// Box traits
 	exColor mColor;
+	exVector2 mPosition;
 };

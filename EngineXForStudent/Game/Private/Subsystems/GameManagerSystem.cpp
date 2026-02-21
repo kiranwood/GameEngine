@@ -4,8 +4,7 @@
 #include "Game/Public/Actors/Bird.h"
 #include "Game/Public/Actors/Pipe.h"
 #include "Game/Public/Actors/BoxTrigger.h"
-#include "Game/Public/Actors/TopPipeSection.h"
-#include "Game/Public/Actors/BottomPipeSection.h"
+#include "Game/Public/Actors/PipeSection.h"
 #include "Game/Public/Components/BoxColliderComponent.h"
 #include <memory>
 
@@ -39,26 +38,26 @@ void GameManagerSystem::RegisterPipe(std::shared_ptr<Pipe> pipe)
 	}
 
 	// ---- Game-over triggers (top and bottom pipe sections) ----
-	auto registerGameOver = [this](std::shared_ptr<Actor> section)
+	auto registerGameOver = [this](std::shared_ptr<PipeSection> section)
 		{
 			if (!section) return;
-			if (std::shared_ptr<BoxColliderComponent> col =
-				section->GetComponentOfType<BoxColliderComponent>())
-			{
-				CollisionEventSignature onGameOver =
-					[this](std::weak_ptr<Actor> other, const exVector2)
+
+			// Calls game over
+			CollisionEventSignature onGameOver =
+				[this](std::weak_ptr<Actor> other, const exVector2)
+				{
+					if (mIsGameOver) return;
+					if (other.expired()) return;
+					if (std::dynamic_pointer_cast<Bird>(other.lock()))
 					{
-						if (mIsGameOver) return;
-						if (other.expired()) return;
-						if (std::dynamic_pointer_cast<Bird>(other.lock()))
-						{
-							TriggerGameOver();
-						}
-					};
-				col->ListenForCollision(onGameOver);
-			}
+						TriggerGameOver();
+					}
+				};
+			
+			section->ApplyCollisionEvent(onGameOver);
 		};
 
+	// Registers collision for pipe
 	registerGameOver(pipe->GetTopPipe());
 	registerGameOver(pipe->GetBotPipe());
 }

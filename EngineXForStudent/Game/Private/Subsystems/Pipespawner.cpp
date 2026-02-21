@@ -73,7 +73,7 @@ void PipeSpawner::SpawnPipe()
 
 	// SpawnActorOfType<Pipe>(TransformLocation, Pipe::position, Pipe::speed)
 	std::shared_ptr<Pipe> newPipe =
-		Actor::SpawnActorOfType<Pipe>(spawnPos, spawnPos, mPipeSpeed);
+		Actor::SpawnActorOfType<Pipe>(spawnPos, mPipeSpeed);
 
 	if (newPipe)
 	{

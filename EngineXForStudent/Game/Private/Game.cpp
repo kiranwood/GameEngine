@@ -35,8 +35,8 @@ const char* gWindowName = "Flappy Bird";
 //-----------------------------------------------------------------
 
 static constexpr float kPipeSpeed = 100.0f;   // pixels per frame the pipe scrolls left
-static constexpr float kPipeSpawnInterval = 3.0f;   // seconds between new pipes
-static constexpr float kPipeSpawnX = 750.0f; // just off the right edge of the screen
+static constexpr float kPipeSpawnInterval = 2.0f;   // seconds between new pipes
+static constexpr float kPipeSpawnX = 800.0f; // just off the right edge of the screen
 
 
 MyGame::MyGame()
@@ -51,6 +51,7 @@ MyGame::MyGame()
 	, mGameManager(nullptr)
 	, mPipeSpawner(nullptr)
 	, mGameState(GAMESTART)
+	, mInputMask(0)
 {
 }
 
@@ -138,7 +139,7 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	mTitleText->BeginPlay();
 
 	
-
+	// Creates text to let player know
 	mInputText = std::make_shared<Text>(
 		std::string("Press Space to Start"), goTextColor, mFontID, exVector2{ 250.0f, 400.0f });
 	mInputText->BeginPlay();

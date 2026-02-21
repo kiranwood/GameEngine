@@ -55,9 +55,9 @@
     <ClInclude Include="Game\Public\Actors\BoxTrigger.h" />
     <ClInclude Include="Game\Public\Components\LineRenderComponent.h" />
     <ClInclude Include="Game\Public\Subsystems\GameManagerSystem.h" />
-    <ClInclude Include="Game\Public\Actors\TopPipeSection.h" />
-    <ClInclude Include="Game\Public\Actors\BottomPipeSection.h" />
     <ClInclude Include="Game\Public\Actors\Pipe.h" />
+    <ClInclude Include="Game\Public\Actors\Bird.h" />
+    <ClInclude Include="Game\Public\Actors\PipeSection.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\Private\Main.cpp">
@@ -127,13 +127,17 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\Public\Components\TextRenderComponent.h" />
-    <ClCompile Include="Game\Private\Actors\TopPipeSection.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Private\Actors\BottomPipeSection.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Private\Actors\Pipe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Actors\Bird.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Private\Subsystems\Pipespawner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Public\Subsystems\Pipespawner.h" />
+    <ClCompile Include="Game\Private\Actors\PipeSection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
