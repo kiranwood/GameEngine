@@ -23,6 +23,12 @@ class PipeSpawner;
 class Pipe;
 class Bird;
 
+enum GameState {
+	GAMESTART,
+	GAMEMAIN,
+	GAMEOVER
+};
+
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
 
@@ -43,6 +49,10 @@ public:
 
 	virtual void				Run( float fDeltaT );
 
+	virtual void				GameOver(float fDeltaT);
+	virtual void				MainGame(float fDeltaT);
+	virtual void				GameStart(float fDeltaT);
+
 	// Game manager friendly APIs
 	void						AddScore(int amount = 1);
 	void						TriggerGameOver();
@@ -59,6 +69,8 @@ private:
 
 	bool						mUp;
 	bool						mDown;
+
+	GameState					mGameState;
 
 	exVector2					mTextPosition;
 	std::shared_ptr<Ball>		mBall_First;

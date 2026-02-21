@@ -5,14 +5,14 @@
         {
             "primary-output": "OutGame\\Pipespawner.h.obj",
             "outputs": [
-                "C:\\Users\\pg29kiran\\Documents\\GameEngine\\EngineXForStudent\\OutGame\\vc143.pdb",
+                "C:\\Users\\Kiran\\VFS 2025\\Term 3\\Advanced OOP in C++\\A4 - Arcade Game\\GameEngine\\EngineXForStudent\\OutGame\\vc143.pdb",
                 "OutGame\\",
-                "C:\\Users\\pg29kiran\\Documents\\GameEngine\\EngineXForStudent\\OutGame\\Pipespawner.h.ifc"
+                "C:\\Users\\Kiran\\VFS 2025\\Term 3\\Advanced OOP in C++\\A4 - Arcade Game\\GameEngine\\EngineXForStudent\\OutGame\\Pipespawner.h.ifc"
             ],
             "provides": [
                 {
                     "logical-name": "Game\\Public\\Subsystems\\Pipespawner.h",
-                    "source-path": "c:\\users\\pg29kiran\\documents\\gameengine\\enginexforstudent\\game\\public\\subsystems\\pipespawner.h",
+                    "source-path": "c:\\users\\kiran\\vfs 2025\\term 3\\advanced oop in c++\\a4 - arcade game\\gameengine\\enginexforstudent\\game\\public\\subsystems\\pipespawner.h",
                     "lookup-method": "absolute"
                 }
             ],

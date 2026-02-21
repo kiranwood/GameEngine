@@ -40,16 +40,17 @@ static constexpr float kPipeSpawnX = 750.0f; // just off the right edge of the s
 
 
 MyGame::MyGame()
-	: mEngine( nullptr )
+	: mEngine(nullptr)
 	, mFontID(-1) // invalid font id to start until loaded in Initialize()
-	, mBigFontID( -1 ) // invalid font id to start until loaded in Initialize()
-	, mUp( false )
-	, mDown( false )
+	, mBigFontID(-1) // invalid font id to start until loaded in Initialize()
+	, mUp(false)
+	, mDown(false)
 	, mScore(0)
 	, mIsGameOver(false)
 	, mBallRadius(0.0f)
 	, mGameManager(nullptr)
 	, mPipeSpawner(nullptr)
+	, mGameState(GAMESTART)
 {
 }
 
@@ -130,6 +131,8 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 			}
 		}
 	);
+
+	mGameState = GAMEMAIN;
 }
 
 //-----------------------------------------------------------------
@@ -178,6 +181,29 @@ void MyGame::OnEventsConsumed()
 
 // Like update function. Runs every frame
 void MyGame::Run( float fDeltaT ) // How much time between frames
+{
+	// Runs section of game based on state
+	switch (mGameState)
+	{
+		case 0:
+			GameStart(fDeltaT);
+			break;
+		case 1:
+			MainGame(fDeltaT);
+			break;
+		case 2:
+			GameOver(fDeltaT);
+			break;
+	}
+}
+
+// Title of game
+void MyGame::GameStart(float fDeltaT)
+{
+}
+
+// Main Game
+void MyGame::MainGame(float fDeltaT)
 {
 	if (mInputMask & INPUT_FLAP)
 	{
@@ -233,6 +259,12 @@ void MyGame::Run( float fDeltaT ) // How much time between frames
 		}
 	}
 }
+
+// Game Over
+void MyGame::GameOver(float fDeltaT)
+{
+}
+
 
 void MyGame::AddScore(int amount)
 {

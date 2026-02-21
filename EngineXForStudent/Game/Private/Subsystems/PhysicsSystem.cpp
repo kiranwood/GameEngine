@@ -89,8 +89,8 @@ void PhysicsEngine::ResolveWorldBounds(const std::shared_ptr<PhysicsComponent>& 
 	const float maxX = kViewportWidth - r;
 	const float minY = r;
 	const float maxY = kViewportHeight - r;
-
-	if (pos.x < minX) { pos.x = minX; vel.x = 0.0f; TriggerGameOver();}
+	// TODO: FIX GAME OVER TRIGGER
+	if (pos.x < minX) { pos.x = minX; vel.x = 0.0f; /*TriggerGameOver();*/ }
 	else if (pos.x > maxX) { pos.x = maxX; vel.x = 0.0f; }
 
 	if (pos.y < minY) { pos.y = minY; vel.y = 0.0f; }
