@@ -28,7 +28,7 @@
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
 
-const char* gWindowName = "Sample EngineX Game";
+const char* gWindowName = "Flappy Bird";
 
 //-----------------------------------------------------------------
 //-----------------------------------------------------------------
@@ -132,7 +132,16 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 		}
 	);
 
-	mGameState = GAMEMAIN;
+	// Creates game over text
+	mTitleText = std::make_shared<Text>(
+		std::string("Flappy Bird"), goTextColor, mBigFontID, exVector2{ 225.0f, 250.0f });
+	mTitleText->BeginPlay();
+
+	
+
+	mInputText = std::make_shared<Text>(
+		std::string("Press Space to Start"), goTextColor, mFontID, exVector2{ 250.0f, 400.0f });
+	mInputText->BeginPlay();
 }
 
 //-----------------------------------------------------------------
@@ -164,7 +173,7 @@ void MyGame::OnEvent(SDL_Event* pEvent) // called for each event polled from SDL
 	{
 		if (pEvent->key.keysym.scancode == SDL_SCANCODE_SPACE && pEvent->key.repeat == 0)
 		{
-			mInputMask |= INPUT_FLAP; // Performs OR operation
+			mInputMask |= INPUT_SPACE; // Performs OR operation
 		}
 	}
 }
@@ -195,24 +204,32 @@ void MyGame::Run( float fDeltaT ) // How much time between frames
 			GameOver(fDeltaT);
 			break;
 	}
+
+	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
+	RENDER_ENGINE.RenderUpdate(mEngine);
 }
 
 // Title of game
 void MyGame::GameStart(float fDeltaT)
 {
+
+	// Press space to start game
+	if (mInputMask & INPUT_SPACE)
+	{
+		mTitleText.reset();
+		mInputText.reset();
+		mGameState = GAMEMAIN;
+	}
 }
 
 // Main Game
 void MyGame::MainGame(float fDeltaT)
 {
-	if (mInputMask & INPUT_FLAP)
+	if (mInputMask & INPUT_SPACE)
 	{
 		if (mBird) mBird->Flap(); // If pointer exists, execute member method.
-		mInputMask &= ~INPUT_FLAP; // Clears mInputMask member.
+		mInputMask &= ~INPUT_SPACE; // Clears mInputMask member.
 	}
-
-	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
-	RENDER_ENGINE.RenderUpdate(mEngine);
 
 	// --- Pipe spawner: ticks all live pipes, removes off-screen ones,
 	//     and spawns new ones on the interval. Stops when game over. ---
@@ -252,10 +269,7 @@ void MyGame::MainGame(float fDeltaT)
 		{
 			mIsGameOver = true;
 
-			exColor goTextColor{ 255, 50, 50, 255 };
-			mGameOverText = std::make_shared<Text>(
-				std::string("Game Over!"), goTextColor, mBigFontID, exVector2{ 225.0f, 250.0f });
-			mGameOverText->BeginPlay();
+			mGameState = GAMEOVER;
 		}
 	}
 }
@@ -263,6 +277,12 @@ void MyGame::MainGame(float fDeltaT)
 // Game Over
 void MyGame::GameOver(float fDeltaT)
 {
+	exColor goTextColor{ 255, 50, 50, 255 };
+
+	// Creates game over text
+	mGameOverText = std::make_shared<Text>(
+		std::string("Game Over!"), goTextColor, mBigFontID, exVector2{ 225.0f, 250.0f });
+	mGameOverText->BeginPlay();
 }
 
 

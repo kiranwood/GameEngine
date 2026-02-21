@@ -81,6 +81,8 @@ private:
 	// separate text actors
 	std::shared_ptr<Text>		mScoreText;
 	std::shared_ptr<Text>		mGameOverText;
+	std::shared_ptr<Text>		mTitleText;
+	std::shared_ptr<Text>		mInputText;
 
 	int							mScore;
 	bool						mIsGameOver;
@@ -95,7 +97,7 @@ private:
 	enum InputBits : unsigned char
 	{
 		INPUT_NONE = 0,
-		INPUT_FLAP = 1 << 0,
+		INPUT_SPACE = 1 << 0,
 	};
 
 	unsigned char mInputMask;
