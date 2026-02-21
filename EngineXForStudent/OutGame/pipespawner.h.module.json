@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "OutGame\\Pipespawner.h.obj",
+            "outputs": [
+                "C:\\Users\\pg29kiran\\Documents\\GameEngine\\EngineXForStudent\\OutGame\\vc143.pdb",
+                "OutGame\\",
+                "C:\\Users\\pg29kiran\\Documents\\GameEngine\\EngineXForStudent\\OutGame\\Pipespawner.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "Game\\Public\\Subsystems\\Pipespawner.h",
+                    "source-path": "c:\\users\\pg29kiran\\documents\\gameengine\\enginexforstudent\\game\\public\\subsystems\\pipespawner.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

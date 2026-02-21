@@ -2,34 +2,32 @@
 #include "Game/Public/Utils.h"
 #include <vector>
 
-//Manages the game state when the player loses ("game over" condition).
-//Handles score management (updating, storing, etc.).
+// Manages score (touch BoxTrigger) and game over (touch TopPipeSection / BottomPipeSection).
 
 class GameManagerSystem
 {
 public:
 	GameManagerSystem(class MyGame* game);
 
-	// called every frame from MyGame (or wherever subsystems are ticked)
+	// Call once after the Pipe is spawned so we can hook its colliders
+	void RegisterPipe(std::shared_ptr<class Pipe> pipe);
+
+	// Called every frame from MyGame::Run
 	void GameUpdate(float DeltaTime);
 
 	// Score management
 	void AddScore(int amount = 1);
-	int GetScore() const;
+	int  GetScore()  const;
 	void ResetScore();
 
-	// Game over state management
+	// Game-over state
 	void TriggerGameOver();
-	bool IsGameOver() const;
+	bool IsGameOver()   const;
 	void ResetGameOver();
 
 private:
 	class MyGame* mGame;
-	std::vector<std::shared_ptr<class Actor>> mScoreTriggers;
-	std::vector<std::shared_ptr<class Actor>> mGameOverTriggers;
 
-	// runtime state
-	int mScore = 0;
+	int  mScore = 0;
 	bool mIsGameOver = false;
-	bool mInitialized = false;
 };

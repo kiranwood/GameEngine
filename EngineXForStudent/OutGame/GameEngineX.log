@@ -1,46 +1,5 @@
 ﻿  Scanning sources for module dependencies...
-  Game.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(462,85): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'Game/Private/Game.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(462,85):
-      the template instantiation context (the oldest one first) is
-          C:\Users\Kiran\VFS 2025\Term 3\Advanced OOP in C++\A4 - Arcade Game\GameEngine\EngineXForStudent\Game\Private\Game.cpp(81,23):
-          see reference to function template instantiation 'std::shared_ptr<Ball> Actor::SpawnActorOfType<Ball,int,exColor>(exVector2,int,exColor)' being compiled
-          C:\Users\Kiran\VFS 2025\Term 3\Advanced OOP in C++\A4 - Arcade Game\GameEngine\EngineXForStudent\Game\Public\Actor.h(33,50):
-          see reference to function template instantiation 'std::shared_ptr<Ball> std::make_shared<Ball,int&,exColor&>(int &,exColor &)' being compiled
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
-          see reference to function template instantiation 'std::_Ref_count_obj2<Ball>::_Ref_count_obj2<int&,exColor&>(int &,exColor &)' being compiled
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
-          see reference to function template instantiation 'void std::_Construct_in_place<_Ty,int&,exColor&>(_Ty &,int &,exColor &) noexcept(false)' being compiled
-          with
-          [
-              _Ty=Ball
-          ]
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
-          see reference to function template instantiation '_Ty *std::construct_at<_Ty,int&,exColor&>(_Ty *const ,int &,exColor &) noexcept(<expr>)' being compiled
-          with
-          [
-              _Ty=Ball
-          ]
-  
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'Game/Private/Game.cpp')
-  
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(463,90): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  (compiling source file 'Game/Private/Game.cpp')
-      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(463,90):
-      the template instantiation context (the oldest one first) is
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
-          see reference to function template instantiation 'void std::_Construct_in_place<_Ty,int&,exColor&>(_Ty &,int &,exColor &) noexcept(false)' being compiled
-          with
-          [
-              _Ty=Ball
-          ]
-          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
-          see reference to function template instantiation '_Ty *std::construct_at<_Ty,int&,exColor&>(_Ty *const ,int &,exColor &) noexcept(false)' being compiled
-          with
-          [
-              _Ty=Ball
-          ]
-  
-  GameEngineX.vcxproj -> C:\Users\Kiran\VFS 2025\Term 3\Advanced OOP in C++\A4 - Arcade Game\GameEngine\EngineXForStudent\Build\GameEngineXd.exe
+  BottomPipeSection.cpp
+  TopPipeSection.cpp
+  Generating Code...
+  GameEngineX.vcxproj -> C:\Users\pg29kiran\Documents\GameEngine\EngineXForStudent\Build\GameEngineXd.exe

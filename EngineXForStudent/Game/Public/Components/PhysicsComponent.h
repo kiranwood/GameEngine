@@ -7,15 +7,22 @@ using CollisionEventSignature = std::function<void(std::weak_ptr<Actor>, const e
 
 class PhysicsComponent : public Component, public std::enable_shared_from_this<PhysicsComponent>
 {
+
 public:
+
 	PhysicsComponent() = delete;
 
-	PhysicsComponent(std::weak_ptr<Actor> owner, exVector2 velocity = { 0.0f, 0.0f }, 
-					bool isStatic = false, bool isGravityEnabled = false);
+	PhysicsComponent(std::weak_ptr<Actor> owner, exVector2 velocity = { 0.0f,0.0f },
+		bool isStatic = false, bool isGravityEnabled = false);
 
 	virtual void BeginPlay() override;
 	virtual void Tick(const float DeltaTime) override;
-	virtual void DoPhysics();
+	virtual void DoPhysics(const float DeltaTime);
+
+	// Gravity acceleration (px/s^2). +Y is downwards
+	static constexpr float kGravityAccel = 900.0f;
+
+	void AddImpulse(const exVector2& impulse);
 
 #pragma region Collision
 
@@ -24,8 +31,8 @@ public:
 
 	void ListenForCollision(CollisionEventSignature& delegateToAdd);
 	void StopListeningForCollision(CollisionEventSignature& delegateToRemove);
-	void BroadcastCollisionEvent(std::weak_ptr<Actor> otherActor, const exVector2 hitLocation);
-	
+	void BroadcastCollisionEvents(std::weak_ptr<Actor> otherActor, const exVector2 hitLocation);
+
 	exVector2 GetVelocity() const;
 	void SetVelocity(exVector2 inVelocity);
 

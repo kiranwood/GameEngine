@@ -3,9 +3,9 @@
 #include "Game/Public/Actor.h"
 #include "Game/Public/Subsystems/PhysicsSystem.h"
 
-PhysicsComponent::PhysicsComponent(std::weak_ptr<Actor> owner, exVector2 velocity, 
-                                    bool isStatic, bool isGravityEnabled) : Component(owner),
-                                    mVelocity(velocity), mIsStatic(isStatic), mIsGravityEnabled(isGravityEnabled)
+PhysicsComponent::PhysicsComponent(std::weak_ptr<Actor> owner, exVector2 velocity,
+    bool isStatic, bool isGravityEnabled) : Component(owner),
+    mVelocity(velocity), mIsStatic(isStatic), mIsGravityEnabled(isGravityEnabled)
 {
 }
 
@@ -18,23 +18,28 @@ void PhysicsComponent::BeginPlay()
 
 void PhysicsComponent::Tick(const float DeltaTime)
 {
+    //DoPhysics();
 }
 
-void PhysicsComponent::DoPhysics()
+void PhysicsComponent::DoPhysics(const float DeltaTime)
 {
-    if (mIsStatic)
-    {
-        return;
-    }
+    if (mIsStatic) return;
+    if (mOwner.expired()) return;
 
-    if (mOwner.expired())
+    if (auto TransformComp = mOwner.lock()->GetComponentOfType<TransformComponent>())
     {
-        return;
-    }
+        if (mIsGravityEnabled)
+        {
+            mVelocity.y += kGravityAccel * DeltaTime; // Change in velocity
+        }
 
-    if (const std::shared_ptr<TransformComponent> TransformComp = mOwner.lock()->GetComponentOfType<TransformComponent>())
-    {
-        exVector2 NewPosition = TransformComp->GetLocation() + mVelocity;
+        // Change in position
+        exVector2 DeltaPos;
+        DeltaPos.x = mVelocity.x * DeltaTime;
+        DeltaPos.y = mVelocity.y * DeltaTime;
+
+        // Position updated
+        exVector2 NewPosition = TransformComp->GetLocation() + DeltaPos;
         TransformComp->SetLocation(NewPosition);
     }
 }
@@ -62,7 +67,7 @@ void PhysicsComponent::StopListeningForCollision(CollisionEventSignature& delega
         });
 }
 
-void PhysicsComponent::BroadcastCollisionEvent(std::weak_ptr<Actor> otherActor, const exVector2 hitLocation)
+void PhysicsComponent::BroadcastCollisionEvents(std::weak_ptr<Actor> otherActor, const exVector2 hitLocation)
 {
     for (CollisionEventSignature& Event : mCollisionEvents)
     {
@@ -78,4 +83,11 @@ exVector2 PhysicsComponent::GetVelocity() const
 void PhysicsComponent::SetVelocity(exVector2 inVelocity)
 {
     mVelocity = inVelocity;
+}
+
+void PhysicsComponent::AddImpulse(const exVector2& impulse)
+{
+    // Sets new velocity
+    mVelocity.x += impulse.x;
+    mVelocity.y += impulse.y;
 }

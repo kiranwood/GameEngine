@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "OutGame\\Pipespawner.obj",
+            "outputs": [
+                "OutGame\\Pipespawner.h_F362A99F6EB0C9F0.ifc.dt.module.json",
+                "OutGame\\Pipespawner.h_F362A99F6EB0C9F0.ifc.dt.d.json",
+                "OutGame\\Pipespawner.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Users\\pg29kiran\\Documents\\GameEngine\\EngineXForStudent\\Game\\Public\\Subsystems\\Pipespawner.h",
+                    "source-path": "c:\\users\\pg29kiran\\documents\\gameengine\\enginexforstudent\\game\\public\\subsystems\\pipespawner.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}
