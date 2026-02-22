@@ -160,9 +160,9 @@ const char* MyGame::GetWindowName() const
 // Can have RBG colour for anything
 void MyGame::GetClearColor( exColor& color ) const
 {
-	color.mColor[0] = 128;
-	color.mColor[1] = 128;
-	color.mColor[2] = 128;
+	color.mColor[0] = 149;
+	color.mColor[1] = 237;
+	color.mColor[2] = 237;
 }
 
 //-----------------------------------------------------------------
