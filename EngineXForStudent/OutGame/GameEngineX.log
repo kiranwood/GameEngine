@@ -4,20 +4,20 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.3520
   (compiling source file 'Game/Private/Actors/PipeSection.cpp')
       C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(462,85):
       the template instantiation context (the oldest one first) is
-          C:\Users\Kiran\VFS 2025\Term 3\Advanced OOP in C++\A4 - Arcade Game\GameEngine\EngineXForStudent\Game\Private\Actors\PipeSection.cpp(41,25):
-          see reference to function template instantiation 'std::shared_ptr<Box> Actor::SpawnActorOfType<Box,float,int,exColor>(exVector2,float,int,exColor)' being compiled
+          C:\Users\Kiran\VFS 2025\Term 3\Advanced OOP in C++\A4 - Arcade Game\GameEngine\EngineXForStudent\Game\Private\Actors\PipeSection.cpp(56,25):
+          see reference to function template instantiation 'std::shared_ptr<Box> Actor::SpawnActorOfType<Box,float,int,exColor,int>(exVector2,float,int,exColor,int)' being compiled
           C:\Users\Kiran\VFS 2025\Term 3\Advanced OOP in C++\A4 - Arcade Game\GameEngine\EngineXForStudent\Game\Public\Actor.h(33,50):
-          see reference to function template instantiation 'std::shared_ptr<Box> std::make_shared<Box,float&,int&,exColor&>(float &,int &,exColor &)' being compiled
+          see reference to function template instantiation 'std::shared_ptr<Box> std::make_shared<Box,float&,int&,exColor&,int&>(float &,int &,exColor &,int &)' being compiled
           C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
-          see reference to function template instantiation 'std::_Ref_count_obj2<Box>::_Ref_count_obj2<float&,int&,exColor&>(float &,int &,exColor &)' being compiled
+          see reference to function template instantiation 'std::_Ref_count_obj2<Box>::_Ref_count_obj2<float&,int&,exColor&,int&>(float &,int &,exColor &,int &)' being compiled
           C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
-          see reference to function template instantiation 'void std::_Construct_in_place<_Ty,float&,int&,exColor&>(_Ty &,float &,int &,exColor &) noexcept(false)' being compiled
+          see reference to function template instantiation 'void std::_Construct_in_place<_Ty,float&,int&,exColor&,int&>(_Ty &,float &,int &,exColor &,int &) noexcept(false)' being compiled
           with
           [
               _Ty=Box
           ]
           C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
-          see reference to function template instantiation '_Ty *std::construct_at<_Ty,float&,int&,exColor&>(_Ty *const ,float &,int &,exColor &) noexcept(<expr>)' being compiled
+          see reference to function template instantiation '_Ty *std::construct_at<_Ty,float&,int&,exColor&,int&>(_Ty *const ,float &,int &,exColor &,int &) noexcept(<expr>)' being compiled
           with
           [
               _Ty=Box
@@ -31,13 +31,13 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.3520
       C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(463,90):
       the template instantiation context (the oldest one first) is
           C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
-          see reference to function template instantiation 'void std::_Construct_in_place<_Ty,float&,int&,exColor&>(_Ty &,float &,int &,exColor &) noexcept(false)' being compiled
+          see reference to function template instantiation 'void std::_Construct_in_place<_Ty,float&,int&,exColor&,int&>(_Ty &,float &,int &,exColor &,int &) noexcept(false)' being compiled
           with
           [
               _Ty=Box
           ]
           C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
-          see reference to function template instantiation '_Ty *std::construct_at<_Ty,float&,int&,exColor&>(_Ty *const ,float &,int &,exColor &) noexcept(false)' being compiled
+          see reference to function template instantiation '_Ty *std::construct_at<_Ty,float&,int&,exColor&,int&>(_Ty *const ,float &,int &,exColor &,int &) noexcept(false)' being compiled
           with
           [
               _Ty=Box

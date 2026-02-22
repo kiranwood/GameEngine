@@ -278,7 +278,7 @@ void MyGame::MainGame(float fDeltaT)
 // Game Over
 void MyGame::GameOver(float fDeltaT)
 {
-	exColor goTextColor{ 255, 50, 50, 255 };
+  	exColor goTextColor{ 255, 50, 50, 255 };
 
 	// Creates game over text
 	mGameOverText = std::make_shared<Text>(

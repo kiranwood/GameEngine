@@ -40,3 +40,11 @@ void Pipe::Tick(float fDeltaT)
 		PipePhysics->SetVelocity(velocity);
 	}
 }
+
+exVector2 Pipe::GetPosition()
+{
+	if (std::shared_ptr<TransformComponent> transform = mTrigger->GetComponentOfType<TransformComponent>())
+	{
+		return transform->GetLocation();
+	}
+}

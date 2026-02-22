@@ -14,6 +14,7 @@ public:
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float fDeltaT) override;
+	virtual exVector2 GetPosition();
 
 	// Accessors so GameManagerSystem can register collision listeners
 	std::shared_ptr<PipeSection>    GetTopPipe()  const { return mTopPipe; }

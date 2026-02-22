@@ -3,10 +3,11 @@
 #include "Engine/Public/EngineInterface.h"
 
 // Constructor
-BoxRenderComponent::BoxRenderComponent(std::weak_ptr<Actor> owner, exColor renderColor, float width, float height) :
+BoxRenderComponent::BoxRenderComponent(std::weak_ptr<Actor> owner, exColor renderColor, float width, float height, int layer) :
 	RenderComponent(owner, renderColor),
 	mWidth(width),
-	mHeight(height)
+	mHeight(height),
+	mLayer(layer)
 {
 }
 
@@ -31,7 +32,7 @@ void BoxRenderComponent::Render(exEngineInterface* EngineInterface)
 					topLeftPos += CenterPos;
 					bottomRightPos += CenterPos;
 
-					EngineInterface->DrawBox(topLeftPos, bottomRightPos, mRenderColor, 2);
+					EngineInterface->DrawBox(topLeftPos, bottomRightPos, mRenderColor, mLayer);
 				}
 			}
 		}

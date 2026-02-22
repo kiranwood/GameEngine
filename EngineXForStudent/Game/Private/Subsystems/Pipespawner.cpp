@@ -42,12 +42,12 @@ void PipeSpawner::Update(float deltaTime, bool isGameOver)
 		std::remove_if(mActivePipes.begin(), mActivePipes.end(),
 			[this](const std::shared_ptr<Pipe>& pipe)
 			{
-				return IsOffScreen(pipe);
+ 				return IsOffScreen(pipe);
 			}),
 		mActivePipes.end());
 
 	// Advance spawn timer and spawn a new pipe when the interval elapses
-	mTimer += deltaTime;
+ 	mTimer += deltaTime;
 	if (mTimer >= mSpawnInterval)
 	{
 		mTimer = 0.0f;
@@ -97,7 +97,9 @@ bool PipeSpawner::IsOffScreen(const std::shared_ptr<Pipe>& pipe) const
 	if (std::shared_ptr<TransformComponent> tr =
 		pipe->GetComponentOfType<TransformComponent>())
 	{
-		return tr->GetLocation().x < kDestroyX;
+		bool result = pipe->GetPosition().x < kDestroyX;
+
+ 		return result;
 	}
 
 	return false;

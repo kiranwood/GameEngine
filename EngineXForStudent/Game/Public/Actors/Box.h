@@ -5,7 +5,7 @@ class Box : public Actor
 {
 public:
 
-	Box(float width, float height, exColor color);
+	Box(float width, float height, exColor color, int renderLayer);
 
 	virtual void BeginPlay() override;
 
@@ -17,5 +17,6 @@ private:
 
 	// Box traits
 	exColor mColor;
+	int mRenderLayer;
 	exVector2 mPosition;
 };

@@ -22,11 +22,15 @@ protected:
 	float mHeight;
 
 	exColor mPipeGreen;
+	exColor mPipeHighlightGreen;
 	exColor mPipeYellow;
+	exColor mPipeYellowHighlight;
 
 	exVector2 mPosition;
 	std::shared_ptr<Box> mInnerSection;
 	std::shared_ptr<Box> mOuterSection;
+	std::shared_ptr<Box> mHighlightOuterSection;
+	std::shared_ptr<Box> mHighlightInnerSection;
 
 	bool mIsTopSection;
 };
