@@ -104,3 +104,4 @@ bool PipeSpawner::IsOffScreen(const std::shared_ptr<Pipe>& pipe) const
 
 	return false;
 }
+

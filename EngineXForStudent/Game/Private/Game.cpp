@@ -52,6 +52,7 @@ MyGame::MyGame()
 	, mPipeSpawner(nullptr)
 	, mGameState(GAMESTART)
 	, mInputMask(0)
+	, mGameOverTextShown(false)
 {
 }
 
@@ -95,17 +96,17 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	//mPipe = Actor::SpawnActorOfType<Pipe>(exVector2(600.0f, 350.0f), exVector2(600, 350.0f), 1.0f);
 	//mPipe.reset();
 
-	mBird = Actor::SpawnActorOfType<Bird>(
-		exVector2(kViewportWidth * 0.5f, kViewportHeight * 0.5f),
-		Radius,
-		Color1
-	);
+	//mBird = Actor::SpawnActorOfType<Bird>(
+	//	exVector2(kViewportWidth * 0.5f, kViewportHeight * 0.5f),
+	//	Radius,
+	//	Color1
+	//);
 
 	// Create the score text (top-left)
-	exVector2 scoreTextPos{ 50.0f, 20.0f };
-	exColor scoreTextColor{ 255, 255, 255, 255 };
-	mScoreText = std::make_shared<Text>(std::string("Score: 0"), scoreTextColor, mFontID, scoreTextPos);
-	mScoreText->BeginPlay();
+	//exVector2 scoreTextPos{ 50.0f, 20.0f };
+	//exColor scoreTextColor{ 255, 255, 255, 255 };
+	//mScoreText = std::make_shared<Text>(std::string("Score: 0"), scoreTextColor, mFontID, scoreTextPos);
+	//mScoreText->BeginPlay();
 
 	// Create the centered Game Over text (initially empty)
 	// approximate center positioning using viewport constants
@@ -138,18 +139,18 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 		}
 	);
 
-	mPipeSpawner = std::make_unique<PipeSpawner>(
-		kPipeSpawnInterval,
-		kPipeSpeed,
-		kPipeSpawnX,
-		[this](std::shared_ptr<Pipe> newPipe)
-		{
-			if (mGameManager)
-			{
-				mGameManager->RegisterPipe(newPipe);
-			}
-		}
-	);
+	//mPipeSpawner = std::make_unique<PipeSpawner>(
+	//	kPipeSpawnInterval,
+	//	kPipeSpeed,
+	//	kPipeSpawnX,
+	//	[this](std::shared_ptr<Pipe> newPipe)
+	//	{
+	//		if (mGameManager)
+	//		{
+	//			mGameManager->RegisterPipe(newPipe);
+	//		}
+	//	}
+	//);
 
 	// Creates game over text
 	mTitleText = std::make_shared<Text>(
@@ -229,12 +230,47 @@ void MyGame::Run( float fDeltaT ) // How much time between frames
 // Title of game
 void MyGame::GameStart(float fDeltaT)
 {
-
-	// Press space to start game
 	if (mInputMask & INPUT_SPACE)
 	{
+		mInputMask &= ~INPUT_SPACE;
+
 		mTitleText.reset();
 		mInputText.reset();
+
+		// Create the score text (top-left)
+		exVector2 scoreTextPos{ 50.0f, 20.0f };
+		exColor scoreTextColor{ 255, 255, 255, 255 };
+		mScoreText = std::make_shared<Text>(std::string("Score: 0"), scoreTextColor, mFontID, scoreTextPos);
+		mScoreText->BeginPlay();
+
+
+		// Spawn bird now
+		exColor Color1;
+		Color1.mColor[0] = 255;
+		Color1.mColor[1] = 50;
+		Color1.mColor[2] = 150;
+		Color1.mColor[3] = 255;
+
+		mBird = Actor::SpawnActorOfType<Bird>(
+			exVector2(kViewportWidth * 0.5f, kViewportHeight * 0.5f),
+			mBallRadius,
+			Color1
+		);
+
+		// Spawn pipe spawner now
+		mPipeSpawner = std::make_unique<PipeSpawner>(
+			kPipeSpawnInterval,
+			kPipeSpeed,
+			kPipeSpawnX,
+			[this](std::shared_ptr<Pipe> newPipe)
+			{
+				if (mGameManager)
+				{
+					mGameManager->RegisterPipe(newPipe);
+				}
+			}
+		);
+
 		mGameState = GAMEMAIN;
 	}
 }
@@ -292,12 +328,38 @@ void MyGame::MainGame(float fDeltaT)
 // Game Over
 void MyGame::GameOver(float fDeltaT)
 {
-  	exColor goTextColor{ 255, 50, 50, 255 };
+	// Only run ONCE, not every frame
+	if (!mGameOverTextShown)
+	{
+		mGameOverTextShown = true;
 
-	// Creates game over text
-	mGameOverText = std::make_shared<Text>(
-		std::string("Game Over!"), goTextColor, mBigFontID, exVector2{ 225.0f, 250.0f });
-	mGameOverText->BeginPlay();
+		exColor goTextColor;
+		goTextColor.mColor[0] = 255;
+		goTextColor.mColor[1] = 50;
+		goTextColor.mColor[2] = 50;
+		goTextColor.mColor[3] = 255;
+
+		mGameOverText = std::make_shared<Text>(
+			std::string("Game Over!"), goTextColor, mBigFontID, exVector2{ 225.0f, 250.0f });
+		mGameOverText->BeginPlay();
+
+		exColor restartColor;
+		restartColor.mColor[0] = 255;
+		restartColor.mColor[1] = 50;
+		restartColor.mColor[2] = 50;
+		restartColor.mColor[3] = 255;
+
+		mRestartText = std::make_shared<Text>(
+			std::string("Press Space to Restart"), restartColor, mFontID, exVector2{ 230.0f, 340.0f });
+		mRestartText->BeginPlay();
+	}
+
+	// Check for restart input every frame
+	if (mInputMask & INPUT_SPACE)
+	{
+		mInputMask &= ~INPUT_SPACE;
+		RestartGame();
+	}
 }
 
 
@@ -330,4 +392,66 @@ float MyGame::GetBallRadius() const
 std::shared_ptr<Pipe> MyGame::GetPipe() const
 {
 	return mPipe;
+}
+
+void MyGame::RestartGame()
+{
+	// Hide game over texts
+	if (mGameOverText) { mGameOverText->EndPlay(); mGameOverText.reset(); }
+	if (mRestartText) { mRestartText->EndPlay();  mRestartText.reset(); }
+
+	// Reset all flags
+	mIsGameOver = false;
+	mScore = 0;
+	mGameOverTextShown = false;
+	mInputMask = 0; // Clear ALL input so space doesn't carry over
+
+	// Reset game manager
+	if (mGameManager)
+	{
+		mGameManager->ResetScore();
+		mGameManager->ResetGameOver();
+	}
+
+	// Reset score display
+	if (mScoreText)
+	{
+		if (std::shared_ptr<TextRenderComponent> textComp =
+			mScoreText->GetComponentOfType<TextRenderComponent>())
+		{
+			textComp->SetText("Score: 0");
+		}
+	}
+
+	// Destroy old bird, spawn fresh one
+	if (mBird) { mBird->EndPlay(); mBird.reset(); }
+
+	exColor Color1;
+	Color1.mColor[0] = 255;
+	Color1.mColor[1] = 50;
+	Color1.mColor[2] = 150;
+	Color1.mColor[3] = 255;
+
+	mBird = Actor::SpawnActorOfType<Bird>(
+		exVector2(kViewportWidth * 0.5f, kViewportHeight * 0.5f),
+		mBallRadius,
+		Color1
+	);
+
+	// Fully recreate pipe spawner (resets timer + pipes)
+	mPipeSpawner = std::make_unique<PipeSpawner>(
+		kPipeSpawnInterval,
+		kPipeSpeed,
+		kPipeSpawnX,
+		[this](std::shared_ptr<Pipe> newPipe)
+		{
+			if (mGameManager)
+			{
+				mGameManager->RegisterPipe(newPipe);
+			}
+		}
+	);
+
+	// Back to gameplay
+	mGameState = GAMEMAIN;
 }

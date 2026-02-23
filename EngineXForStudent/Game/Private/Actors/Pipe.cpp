@@ -47,4 +47,6 @@ exVector2 Pipe::GetPosition()
 	{
 		return transform->GetLocation();
 	}
+
+	return exVector2{ 0.0f, 0.0f };
 }
