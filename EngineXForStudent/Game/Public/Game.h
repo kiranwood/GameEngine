@@ -59,7 +59,7 @@ public:
 	std::shared_ptr<Bird>		GetPlayerBall() const;
 	float						GetBallRadius() const;
 	std::shared_ptr<Pipe>		GetPipe() const;
-	void						RestartGame();
+	void						RestartGame(); // Resets game state to start a new game
 
 private:
 
@@ -87,12 +87,10 @@ private:
 
 	int							mScore;
 	bool						mIsGameOver;
-	// In the private members section:
+
+	// Game over text shown flag (to avoid respawning text every frame)
 	bool mGameOverTextShown;
 	std::shared_ptr<Text> mRestartText;
-
-	// In the public methods section:
-	
 
 	// runtime helpers
 	float						mBallRadius;
