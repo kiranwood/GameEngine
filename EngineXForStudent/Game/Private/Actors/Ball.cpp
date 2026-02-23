@@ -24,14 +24,4 @@ void Ball::BeginPlay()
 
 void Ball::OnCollision(std::weak_ptr<Actor>, const exVector2)
 {
-	if (std::shared_ptr<RenderComponent> RenderComp = GetComponentOfType<RenderComponent>())
-	{
-		/*exColor Color;
-		Color.mColor[0] = 20;
-		Color.mColor[1] = 255;
-		Color.mColor[2] = 120;
-		Color.mColor[3] = 255;
-
-		RenderComp->SetColor(Color);*/
-	}
 }

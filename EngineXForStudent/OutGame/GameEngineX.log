@@ -1,3 +1,81 @@
 ﻿  Scanning sources for module dependencies...
+  Compiling...
+  TransformComponent.h
+  Pipespawner.h
+  TextRenderComponent.h
+  Actor.cpp
+  Ball.cpp
+  Bird.cpp
+  Line.cpp
+  PipeSection.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(462,85): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Game/Private/Actors/PipeSection.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(462,85):
+      the template instantiation context (the oldest one first) is
+          C:\Users\pg29kiran\Documents\GameEngine\EngineXForStudent\Game\Private\Actors\PipeSection.cpp(56,25):
+          see reference to function template instantiation 'std::shared_ptr<Box> Actor::SpawnActorOfType<Box,float,int,exColor,int>(exVector2,float,int,exColor,int)' being compiled
+          C:\Users\pg29kiran\Documents\GameEngine\EngineXForStudent\Game\Public\Actor.h(33,50):
+          see reference to function template instantiation 'std::shared_ptr<Box> std::make_shared<Box,float&,int&,exColor&,int&>(float &,int &,exColor &,int &)' being compiled
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2913,46):
+          see reference to function template instantiation 'std::_Ref_count_obj2<Box>::_Ref_count_obj2<float&,int&,exColor&,int&>(float &,int &,exColor &,int &)' being compiled
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          see reference to function template instantiation 'void std::_Construct_in_place<_Ty,float&,int&,exColor&,int&>(_Ty &,float &,int &,exColor &,int &) noexcept(false)' being compiled
+          with
+          [
+              _Ty=Box
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          see reference to function template instantiation '_Ty *std::construct_at<_Ty,float&,int&,exColor&,int&>(_Ty *const ,float &,int &,exColor &,int &) noexcept(<expr>)' being compiled
+          with
+          [
+              _Ty=Box
+          ]
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(476,82): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Game/Private/Actors/PipeSection.cpp')
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(463,90): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  (compiling source file 'Game/Private/Actors/PipeSection.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(463,90):
+      the template instantiation context (the oldest one first) is
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(2100,18):
+          see reference to function template instantiation 'void std::_Construct_in_place<_Ty,float&,int&,exColor&,int&>(_Ty &,float &,int &,exColor &,int &) noexcept(false)' being compiled
+          with
+          [
+              _Ty=Box
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\xutility(472,14):
+          see reference to function template instantiation '_Ty *std::construct_at<_Ty,float&,int&,exColor&,int&>(_Ty *const ,float &,int &,exColor &,int &) noexcept(false)' being compiled
+          with
+          [
+              _Ty=Box
+          ]
+  
+  Text.cpp
+  Component.cpp
+  BoxColliderComponent.cpp
+  BoxRenderComponent.cpp
+  LineRenderComponent.cpp
+  TextRenderComponent.cpp
   Game.cpp
-  GameEngineX.vcxproj -> C:\Users\25847\OneDrive\Desktop\Engine\GameEngine\EngineXForStudent\Build\GameEngineXd.exe
+  Main.cpp
+  TransformComponent.cpp
+  RenderComponent.cpp
+  CircleRenderComponent.cpp
+  PhysicsComponent.cpp
+  Box.cpp
+  CircleColliderComponent.cpp
+  GameManagerSystem.cpp
+  Generating Code...
+  Compiling...
+  Pipespawner.cpp
+  RenderSystem.cpp
+  BoxTrigger.cpp
+  Pipe.cpp
+  PhysicsSystem.cpp
+  Generating Code...
+  LINK : Build\GameEngineXd.exe not found or not built by the last incremental link; performing full link
+EngineXd.lib(Engine.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineXd.lib(Engine.obj)' or at 'C:\Users\pg29kiran\Documents\GameEngine\EngineXForStudent\Build\EngineX.pdb'; linking object as if no debug info
+EngineXd.lib(RenderPacket.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineXd.lib(RenderPacket.obj)' or at 'C:\Users\pg29kiran\Documents\GameEngine\EngineXForStudent\Build\EngineX.pdb'; linking object as if no debug info
+EngineXd.lib(System.obj) : warning LNK4099: PDB 'EngineX.pdb' was not found with 'EngineXd.lib(System.obj)' or at 'C:\Users\pg29kiran\Documents\GameEngine\EngineXForStudent\Build\EngineX.pdb'; linking object as if no debug info
+  GameEngineX.vcxproj -> C:\Users\pg29kiran\Documents\GameEngine\EngineXForStudent\Build\GameEngineXd.exe

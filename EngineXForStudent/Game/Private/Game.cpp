@@ -1,6 +1,11 @@
 //
 // * ENGINE-X
-// * SAMPLE GAME
+// * Flappy Bird
+// 
+// Made by:
+// Nick Tam
+// Tobias Arrieta
+// Kiran Wood
 //
 // + Game.cpp
 // implementation of MyGame, an implementation of exGameInterface
@@ -87,27 +92,6 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 	Color1.mColor[2] = 150;
 	Color1.mColor[3] = 255;
 
-	// Player ball
-	//mBall_First = Actor::SpawnActorOfType<Ball>(exVector2(200.0f, 350.0f), 2, Color1);
-
-	// Creates a random trigger
-
-	// Create Pipe
-	//mPipe = Actor::SpawnActorOfType<Pipe>(exVector2(600.0f, 350.0f), exVector2(600, 350.0f), 1.0f);
-	//mPipe.reset();
-
-	//mBird = Actor::SpawnActorOfType<Bird>(
-	//	exVector2(kViewportWidth * 0.5f, kViewportHeight * 0.5f),
-	//	Radius,
-	//	Color1
-	//);
-
-	// Create the score text (top-left)
-	//exVector2 scoreTextPos{ 50.0f, 20.0f };
-	//exColor scoreTextColor{ 255, 255, 255, 255 };
-	//mScoreText = std::make_shared<Text>(std::string("Score: 0"), scoreTextColor, mFontID, scoreTextPos);
-	//mScoreText->BeginPlay();
-
 	// Create the centered Game Over text (initially empty)
 	// approximate center positioning using viewport constants
 	exVector2 gameOverPos{ 225.0f, 250.0f };
@@ -138,19 +122,6 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 			}
 		}
 	);
-
-	//mPipeSpawner = std::make_unique<PipeSpawner>(
-	//	kPipeSpawnInterval,
-	//	kPipeSpeed,
-	//	kPipeSpawnX,
-	//	[this](std::shared_ptr<Pipe> newPipe)
-	//	{
-	//		if (mGameManager)
-	//		{
-	//			mGameManager->RegisterPipe(newPipe);
-	//		}
-	//	}
-	//);
 
 	// Creates game over text
 	mTitleText = std::make_shared<Text>(
