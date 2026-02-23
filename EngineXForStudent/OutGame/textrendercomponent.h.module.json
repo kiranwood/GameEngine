@@ -5,14 +5,14 @@
         {
             "primary-output": "OutGame\\TextRenderComponent.h.obj",
             "outputs": [
-                "C:\\Users\\tobia\\Desktop\\VFS\\T3\\GameEngine\\EngineXForStudent\\OutGame\\vc143.pdb",
+                "C:\\Users\\25847\\OneDrive\\Desktop\\Engine\\GameEngine\\EngineXForStudent\\OutGame\\vc143.pdb",
                 "OutGame\\",
-                "C:\\Users\\tobia\\Desktop\\VFS\\T3\\GameEngine\\EngineXForStudent\\OutGame\\TextRenderComponent.h.ifc"
+                "C:\\Users\\25847\\OneDrive\\Desktop\\Engine\\GameEngine\\EngineXForStudent\\OutGame\\TextRenderComponent.h.ifc"
             ],
             "provides": [
                 {
                     "logical-name": "Game\\Public\\Components\\TextRenderComponent.h",
-                    "source-path": "c:\\users\\tobia\\desktop\\vfs\\t3\\gameengine\\enginexforstudent\\game\\public\\components\\textrendercomponent.h",
+                    "source-path": "c:\\users\\25847\\onedrive\\desktop\\engine\\gameengine\\enginexforstudent\\game\\public\\components\\textrendercomponent.h",
                     "lookup-method": "absolute"
                 }
             ],
