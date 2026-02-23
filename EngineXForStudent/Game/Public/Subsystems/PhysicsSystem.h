@@ -1,6 +1,7 @@
 #pragma once
 #include "Game/Public/Utils.h"
 
+class Actor;
 class PhysicsComponent;
 
 #define PHYSICS_ENGINE PhysicsEngine::GetInstance()
@@ -26,6 +27,9 @@ public:
 
 	void PhysicsUpdate(const float DeltaTime);
 
+	using OutOfBoundsCallback = std::function<void(std::weak_ptr<Actor>)>;
+	void SetOutOfBoundsCallback(OutOfBoundsCallback cb) { mOnOutOfBounds = std::move(cb); }
+
 private:
 
 	PhysicsEngine();
@@ -37,4 +41,6 @@ private:
 	static std::unique_ptr<PhysicsEngine> sPhysicsEngine;
 
 	std::list<std::weak_ptr<PhysicsComponent>> mPhysicsComponents;
+
+	OutOfBoundsCallback mOnOutOfBounds;
 };

@@ -75,29 +75,39 @@ void PhysicsEngine::ResolveWorldBounds(const std::shared_ptr<PhysicsComponent>& 
 	auto Circle = std::dynamic_pointer_cast<CircleColliderComponent>(component);
 	if (!Circle) return;
 
-	auto Owner = Circle->GetOwner().lock();
-	if (!Owner) return;
+	auto Owner = Circle->GetOwner();
+	auto OwnerSP = Owner.lock();
+	if (!OwnerSP) return;
 
-	auto TransformComp = Owner->GetComponentOfType<TransformComponent>();
+	auto TransformComp = OwnerSP->GetComponentOfType<TransformComponent>();
 	if (!TransformComp) return;
 
 	const float r = Circle->GetRadius();
 	exVector2 pos = TransformComp->GetLocation();
-	exVector2 vel = Circle->GetVelocity();
 
 	const float minX = r;
 	const float maxX = kViewportWidth - r;
 	const float minY = r;
 	const float maxY = kViewportHeight - r;
-	// TODO: FIX GAME OVER TRIGGER
-	if (pos.x < minX) { pos.x = minX; vel.x = 0.0f; /*TriggerGameOver();*/ }
-	else if (pos.x > maxX) { pos.x = maxX; vel.x = 0.0f; }
 
-	if (pos.y < minY) { pos.y = minY; vel.y = 0.0f; }
-	else if (pos.y > maxY) { pos.y = maxY; vel.y = 0.0f; }
+	if (pos.x < minX) pos.x = minX;
+	else if (pos.x > maxX) pos.x = maxX;
+
+	if (pos.y < minY || pos.y > maxY)
+	{
+		if (pos.y < minY) pos.y = minY;
+		else pos.y = maxY;
+
+		TransformComp->SetLocation(pos);
+
+		if (mOnOutOfBounds)
+		{
+			mOnOutOfBounds(Owner); 
+		}
+		return;
+	}
 
 	TransformComp->SetLocation(pos);
-	Circle->SetVelocity(vel);
 }
 
 PhysicsEngine::PhysicsEngine()

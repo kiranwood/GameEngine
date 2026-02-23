@@ -120,6 +120,24 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 
 	// Initialize GameManagerSystem
 	mGameManager = std::make_unique<GameManagerSystem>(this);
+
+	PHYSICS_ENGINE.SetOutOfBoundsCallback(
+		[this](std::weak_ptr<Actor> other)
+		{
+			if (!mGameManager) return;
+			if (mGameManager->IsGameOver()) return;
+
+			auto sp = other.lock();
+			if (!sp) return;
+
+			// Solo si el que se salió es el Bird
+			if (std::dynamic_pointer_cast<Bird>(sp))
+			{
+				mGameManager->TriggerGameOver();
+			}
+		}
+	);
+
 	mPipeSpawner = std::make_unique<PipeSpawner>(
 		kPipeSpawnInterval,
 		kPipeSpeed,
@@ -138,7 +156,6 @@ void MyGame::Initialize( exEngineInterface* pEngine )
 		std::string("Flappy Bird"), goTextColor, mBigFontID, exVector2{ 225.0f, 250.0f });
 	mTitleText->BeginPlay();
 
-	
 	// Creates text to let player know
 	mInputText = std::make_shared<Text>(
 		std::string("Press Space to Start"), goTextColor, mFontID, exVector2{ 250.0f, 400.0f });
@@ -206,7 +223,6 @@ void MyGame::Run( float fDeltaT ) // How much time between frames
 			break;
 	}
 
-	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
 	RENDER_ENGINE.RenderUpdate(mEngine);
 }
 
@@ -242,8 +258,6 @@ void MyGame::MainGame(float fDeltaT)
 	// --- Physics step (moves everything, fires collision events) ---
 	PHYSICS_ENGINE.PhysicsUpdate(fDeltaT);
 
-	// --- Render step ---
-	RENDER_ENGINE.RenderUpdate(mEngine);
 
 	// --- Game manager: sync score text, detect game over ---
 	if (mGameManager)

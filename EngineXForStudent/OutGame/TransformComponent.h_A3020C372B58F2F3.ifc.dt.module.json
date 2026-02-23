@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "OutGame\\TransformComponent.obj",
+            "outputs": [
+                "OutGame\\TransformComponent.h_A3020C372B58F2F3.ifc.dt.module.json",
+                "OutGame\\TransformComponent.h_A3020C372B58F2F3.ifc.dt.d.json",
+                "OutGame\\TransformComponent.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Users\\tobia\\Desktop\\VFS\\T3\\GameEngine\\EngineXForStudent\\Game\\Public\\Components\\TransformComponent.h",
+                    "source-path": "c:\\users\\tobia\\desktop\\vfs\\t3\\gameengine\\enginexforstudent\\game\\public\\components\\transformcomponent.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

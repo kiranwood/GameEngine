@@ -5,14 +5,14 @@
         {
             "primary-output": "OutGame\\TransformComponent.h.obj",
             "outputs": [
-                "C:\\Users\\Kiran\\VFS 2025\\Term 3\\Advanced OOP in C++\\A4 - Arcade Game\\GameEngine\\EngineXForStudent\\OutGame\\vc143.pdb",
+                "C:\\Users\\tobia\\Desktop\\VFS\\T3\\GameEngine\\EngineXForStudent\\OutGame\\vc143.pdb",
                 "OutGame\\",
-                "C:\\Users\\Kiran\\VFS 2025\\Term 3\\Advanced OOP in C++\\A4 - Arcade Game\\GameEngine\\EngineXForStudent\\OutGame\\TransformComponent.h.ifc"
+                "C:\\Users\\tobia\\Desktop\\VFS\\T3\\GameEngine\\EngineXForStudent\\OutGame\\TransformComponent.h.ifc"
             ],
             "provides": [
                 {
                     "logical-name": "Game\\Public\\Components\\TransformComponent.h",
-                    "source-path": "c:\\users\\kiran\\vfs 2025\\term 3\\advanced oop in c++\\a4 - arcade game\\gameengine\\enginexforstudent\\game\\public\\components\\transformcomponent.h",
+                    "source-path": "c:\\users\\tobia\\desktop\\vfs\\t3\\gameengine\\enginexforstudent\\game\\public\\components\\transformcomponent.h",
                     "lookup-method": "absolute"
                 }
             ],

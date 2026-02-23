@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "OutGame\\TextRenderComponent.obj",
+            "outputs": [
+                "OutGame\\TextRenderComponent.h_1AE653236A8932CE.ifc.dt.module.json",
+                "OutGame\\TextRenderComponent.h_1AE653236A8932CE.ifc.dt.d.json",
+                "OutGame\\TextRenderComponent.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Users\\tobia\\Desktop\\VFS\\T3\\GameEngine\\EngineXForStudent\\Game\\Public\\Components\\TextRenderComponent.h",
+                    "source-path": "c:\\users\\tobia\\desktop\\vfs\\t3\\gameengine\\enginexforstudent\\game\\public\\components\\textrendercomponent.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}
